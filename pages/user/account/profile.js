@@ -256,7 +256,7 @@ function profile() {
                             <Col sm="12" className="d-flex justify-content-center">
                                 <Form.Label className={styles.UinSubTitle} >
                                 ขนาดไฟล์: สูงสุด 1 MB <br/>
-                                ไฟล์ที่รองรับ: .JPEG, .PNG
+                                ไฟล์ที่รองรับ: .JPEG, .PNG.
                                 </Form.Label>
                             </Col>
                         </Form.Group>

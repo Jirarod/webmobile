@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from 'react'
-import {Container, Navbar,Popover,OverlayTrigger, Button,Dropdown} from 'react-bootstrap'
+import {Container, Navbar,Popover,OverlayTrigger, Button,Dropdown,Nav} from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 
@@ -46,9 +46,15 @@ function Usernav() {
       <Container>
         
     <Navbar.Brand href="/Marketpage"><h1 className='text-secondary'>Shop</h1></Navbar.Brand>
+     <Nav className='me-auto'>
+     <Nav.Link href="/Marketpage" className='text-secondary'>ร้านค้า</Nav.Link>
+      <Nav.Link href="/user/repairservice" className='text-secondary'>บริการซ่อม</Nav.Link>
+      <Nav.Link href="/Marketpage" className='text-secondary'>บริการรับซื้อ</Nav.Link>
+    </Nav>
     <Navbar.Toggle />
-
     <Navbar.Collapse className="justify-content-end">
+    
+
       {isLoggedIn ? (
         
       <Dropdown>

@@ -15,7 +15,9 @@ export default async function Loginapi(req, res) {
                 if(compare)
                 {
                     
-                    const token = jwt.sign({id:rows[0].Uid,name:rows[0].Uname,email:rows[0].Uemail}, process.env.JWT_SECRET, {expiresIn: '1h'})
+                    
+                    const token = jwt.sign({id:rows[0].Uid,name:rows[0].Uname,email:rows[0].Uemail,
+                        image:rows[0].Uimage,phone:rows[0].Uphone,gender:rows[0].Ugender,birthday:rows[0].Ubirthday}, process.env.JWT_SECRET, {expiresIn: '1s'})
                     console.log("password correct");
                     res.status(200).json({message: 'User logged in', token})
                  

@@ -4,6 +4,9 @@ a{
   
   }
 
+  body{
+    overflow: auto;
+  }
 hr{
     border: 1px solid #999999;
     margin: -1px 0;

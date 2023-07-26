@@ -1,0 +1,107 @@
+.UotpCon{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+}
+
+
+.UotpForm
+{
+    width: 50%;
+    height: 400px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 4px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    
+    padding: 50px;
+}
+.Upass{
+    width: 50%;
+    height: 500px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 4px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    
+    padding: 50px;
+}
+
+
+.UotpBtnconfirm{
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 60px;
+    border-radius: 5px;
+   width: 100%;
+   border: 1px solid #474747;
+   background-color: #ffffffff;
+   color: #474747;
+   
+}
+.UotpBtnconfirm:hover{
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 60px;
+    border-radius: 5px;
+   width: 100%;
+   border: 1px solid #474747;
+   background-color: #474747;
+   color: #ffffff;
+   
+}
+.link
+{
+    text-decoration: none;
+    color: #474747;
+  
+    margin-top: 40px;
+    align-self: center;
+}
+.UotpTitle
+{
+    font-size: 20px;
+    text-align: center;
+    color: #474747;
+    position: relative;
+}
+
+.UotpIcon{
+    justify-self: start;
+    width: 70px;
+    height: 70px;
+    align-self: center;
+    margin-bottom: 20px;
+    color: #474747
+}
+
+.Uotpsend{
+   font-weight: 500;
+   text-decoration-line: underline;
+    margin-top: 20px;
+   
+    justify-content: center;
+    font-size: large;
+   width: 80%;
+   color: rgb(4, 37, 224);
+ 
+}
+.Uotpsend:hover{
+   
+    color: rgb(5, 32, 185);
+  
+ }
+
+ .textbtn{
+    font-weight: 500;
+    font-size: large;
+    margin-top: 15px;
+    text-align: center;
+   position: relative;
+  
+ }

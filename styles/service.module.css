@@ -1,0 +1,55 @@
+.Contain
+{
+    display: flex;
+    flex-direction: column;
+    margin-top: 80px;
+    align-items: center;
+    height: 91.5vh;
+    background-color: rgb(243, 243, 242);
+}
+
+.form{
+    position: relative;
+ 
+    margin-top: 40px;
+    display: flex;
+    margin-left: 60%;
+    flex-direction: column;
+    padding: 20px;
+    width: 30%;
+    height: 50%;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.75);
+
+}
+.title{
+    font-size: 22px;
+    text-align: center;
+    color: #474747;
+    position: relative;
+}
+
+.hr{
+    margin-top: 10px;
+    width: 70%;
+    align-self: center;
+    border: 1px solid #9625f3;
+}
+.btnsubmit{
+    height: 40px;
+     border-radius: 5px;
+    width: 100%;
+    border: 1px solid #9625f3;
+    background-color: #9625f3;
+    color: #ffffff;
+ 
+}
+
+.btnsubmit:hover{
+    border: 1px solid #631a9e;
+    background-color: #5a1791;
+    color: #ffffff;
+ 
+}
+

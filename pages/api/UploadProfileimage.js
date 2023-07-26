@@ -2,7 +2,7 @@ import cloudinary from 'cloudinary';
 import pool from "./Database";
 // const cloudinary = require('cloudinary').v2;
 
-const Upload = async (req, res) => {
+const UploadProfileimage = async (req, res) => {
     // cloudinary.v2.config({
     //     cloud_name: 'dsacsgwkl',
     //     api_key: '339222529121121',
@@ -12,12 +12,13 @@ const Upload = async (req, res) => {
     
     if(req.method==="POST")
     {
-      const {image,email } = req.body;
+      const {image,id} = req.body;
       const [rows, field] = await pool.query(
-        "UPDATE users SET Uimage = ? WHERE users.Uemail = ?",
-        [image,email]
+        "UPDATE users SET Uimage = ? WHERE users.Uid = ?",
+        [image,id]
       );
-      res.status(201).json({ message: "User update image profile" });
+      
+      res.status(201).json({ message: "User update profile" });
       console.log("user update image profile");
 
     }
@@ -27,4 +28,4 @@ const Upload = async (req, res) => {
 
 };
 
-export default Upload;
+export default UploadProfileimage;

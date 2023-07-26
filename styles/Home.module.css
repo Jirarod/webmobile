@@ -42,6 +42,15 @@
     height: 150px;
 
 }
+.UiImgprofilehead
+{
+    margin-top: 15px;
+    margin-left: 5px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+
+}
 .Uselectimg{
     height: 60px;
     width: 100px;
@@ -75,6 +84,28 @@
     margin-top: -2px;
     margin-left: 10px;
     text-align: start;
+}
+.Ubtnad{
+    margin-top: 5px;
+    margin-left: 10px;
+    width: 120px;
+    height: 60px;
+    border-radius: 5px;
+    border: 1px solid #d4d4d4;
+    background-color: #ffffff;
+    color: #474747;
+
+}
+.Ubtnad:hover{
+    margin-top: 5px;
+    margin-left: 10px;
+    width: 120px;
+    height: 60px;
+    border-radius: 5px;
+    border: 1px solid #d4d4d4;
+    background-color: #d4d4d4;
+    color: #474747;
+
 }
 
 .UinFormLabel{

@@ -1,0 +1,181 @@
+.reTitle{
+ font-size: 18px;
+    font-weight: bold;
+    color: #000;
+    
+}
+.resubTitle
+{
+    font-size: 16px;
+    font-weight: 400;
+    color: #474747;
+    margin-top: -2px;
+    margin-left: 10px;
+   
+    text-align: start;
+   
+}
+.reheadansTitle{
+    font-size: 20px;
+    font-weight: bolder;
+    color: #000000;
+    margin-top: -2px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.over{
+    overflow: auto;
+}
+
+.reBox{
+
+    border-right: 2px solid #d4d4d4;
+  
+}
+.reForm{
+    border: #d4d4d4 1px solid;
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+
+
+.reForm:focus{
+    border:1px solid #000000;
+    padding-top: 10px;
+    padding-left: 20px;
+    border-radius: 5px;
+    box-shadow:0px 3px 0.5px 0px #474747;
+}
+
+
+.reproblem{
+    align-self: center;
+    border: #d4d4d4 1px solid;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    max-width:100%;
+    min-width: 50%;
+    margin-right: 20px;
+    background-color: #ffffff;
+    flex-direction: column;
+    word-wrap: break-word;
+    white-space: pre-wrap ;
+
+    max-height: 40%;
+}
+
+.reAns{
+    max-width: 100%;
+    min-width: 20%;
+    word-wrap: break-word;
+    border: #d4d4d4 1px solid;
+    padding: 5px;
+    border-radius: 5px;
+
+}
+.icon{
+
+    margin-bottom: 10px;
+    padding: 10px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: #d4d4d4 1px solid;
+    color: #1f7df8;
+
+}
+
+.hr{
+    margin-bottom: 10px;
+    width: 50%;
+}
+
+
+/* sell*/
+
+.sellForm{
+    margin-top: 20px;
+    border: #d4d4d4 1px solid;
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+
+    background-color: #ffffff;
+}
+
+
+
+.sellImg{
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 5px;
+    border: #d4d4d4 1px solid;
+}
+
+.sellBox{
+ 
+    
+    flex-direction: column;
+    text-align: center;
+    
+    word-wrap: break-word;
+}
+
+.sellIcon{
+    width: 20px;
+    height: 20px;
+    color: #1f7df8;
+    cursor: pointer;
+}
+
+.sellIcon:hover{
+    color: #000000;
+}
+
+.sellviewBox{
+    border: #d4d4d4 1px solid;
+    padding: 20px;
+    border-radius: 5px;
+
+    max-width:100%;
+    min-width: 50%;
+    background-color: #ffffff;
+    flex-direction: column;
+    word-wrap: break-word;
+    white-space: pre-wrap ;
+    max-height: 40%;
+}
+
+.sellinfo
+{ 
+    word-wrap: break-word;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #474747;
+    text-align: start;
+}
+.sellinfo1{
+    border: #d4d4d4 1px solid;
+    border-radius: 5px;
+    word-wrap: break-word;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #474747;
+    text-align: start;
+}

@@ -1,0 +1,34 @@
+/* styles.css */
+.navtab{
+    justify-content: center;
+   
+
+}
+
+.container{
+    padding: 10px;
+    margin-top:40px ;
+    width: 100%;
+    height: 75vh;
+    border: #eee 2px solid;
+    border-radius:10px ;
+   
+    background-color: #f3f3f3;
+    overflow: auto;
+    flex-wrap: wrap;
+    display: flex;
+    
+ 
+}
+
+.Form{
+    width: 100%;
+    border: #757575 1px solid;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+  
+}
+

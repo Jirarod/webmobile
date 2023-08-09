@@ -53,7 +53,7 @@ function Loginpage() {
     <h1 >Login</h1>    
   
     <Form.Group className={styles.formgroup}>
-     <Form.Control className={styles.input} type="email" placeholder="Enter email" required value={email} onChange={(e)=>setEmail(e.target.value)}/>
+     <Form.Control className={styles.input} type="email"  placeholder="Enter email" required value={email} onChange={(e)=>setEmail(e.target.value)}/>
      <Form.Control className={styles.input} type="password" placeholder="Enter password" required value={password} onChange={(e) =>setPassword(e.target.value)}/>
      <Form.Label className={styles.label}>Don't have an account? <Link href="/Registerpage">Signup</Link></Form.Label>
      

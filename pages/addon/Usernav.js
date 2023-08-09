@@ -48,8 +48,8 @@ function Usernav() {
     <Navbar.Brand href="/Marketpage"><h1 className='text-secondary'>Shop</h1></Navbar.Brand>
      <Nav className='me-auto'>
      <Nav.Link href="/Marketpage" className='text-secondary'>ร้านค้า</Nav.Link>
-      <Nav.Link href="/user/repairservice" className='text-secondary'>บริการซ่อม</Nav.Link>
-      <Nav.Link href="/Marketpage" className='text-secondary'>บริการรับซื้อ</Nav.Link>
+      <Nav.Link href="/user/service/repairservice" className='text-secondary'>บริการซ่อม</Nav.Link>
+      <Nav.Link href="/user/service/sellservice" className='text-secondary'>บริการรับซื้อ</Nav.Link>
     </Nav>
     <Navbar.Toggle />
     <Navbar.Collapse className="justify-content-end">

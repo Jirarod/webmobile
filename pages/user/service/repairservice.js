@@ -1,12 +1,12 @@
-import React, { useEffect ,useState} from 'react'
-import Usernav from '../addon/Usernav'
-import { Container ,Form,Button} from 'react-bootstrap'
-import styles from '@/styles/service.module.css'
-import axios from 'axios'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faClipboard} from '@fortawesome/free-solid-svg-icons'
-import { decode } from 'jsonwebtoken' 
-import Swal from 'sweetalert2'
+import React, { useEffect ,useState} from 'react';
+import Usernav from '../../addon/Usernav';
+import { Container ,Form,Button} from 'react-bootstrap';
+import styles from '@/styles/service.module.css';
+import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faClipboard} from '@fortawesome/free-solid-svg-icons';
+import { decode } from 'jsonwebtoken' ;
+import Swal from 'sweetalert2';
 
 
 function repairservice() {
@@ -19,6 +19,7 @@ function repairservice() {
   useEffect(() => {
     const token = localStorage.getItem('token')
    const decoded = decode(token)
+
     if(token){
       setToken(token)
       setId(decoded.id)
@@ -52,7 +53,7 @@ function repairservice() {
           confirmButtonText: 'ตกลง'
         }).then((result) => {
           if (result.isConfirmed) {
-            window.location.reload()
+            window.location.href = '/user/account/listrepair'
           }
         }
         )

@@ -1,0 +1,34 @@
+.iconedit
+{
+    margin-top: 15px;
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+    cursor: pointer;
+    color: #FFC107;
+}
+.iconedit:hover
+{
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+    cursor: pointer;
+    color: #aa8105;
+}
+
+.icondelete
+{
+    width: 20px;
+    height: 20px;
+    margin-left: 20px;
+    cursor: pointer;
+    color: #DC3545;
+}
+.icondelete:hover
+{
+    width: 20px;
+    height: 20px;
+    margin-left: 20px;
+    cursor: pointer;
+    color: #b12c37;
+}

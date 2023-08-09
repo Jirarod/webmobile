@@ -12,5 +12,38 @@ hr{
     margin: -1px 0;
 }
 
+.layoutcontainner{
+  display: flex;
+}
+
+.layoutside{
+  flex : 0 0 250px;
+  transition: all 0.3s ease-in-out;
+
+}
+.layoutside__mini
+{
+  flex : 0 0 60px;
+}
+
+.layoutcontainner__main{
+  display: flex;
+  flex: 1;
+  padding: 20px;
+  flex-direction: column;
+
+}
+.layoutnav
+{
+  flex: 0 0 50px;
+}
+
+.layoutcontainner__content{
+  flex: 1;
+  padding: 20px;
+}
+
+
+
 
 @import 'bootstrap/dist/css/bootstrap.min.css';

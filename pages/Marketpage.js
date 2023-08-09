@@ -5,7 +5,6 @@ import { faUser } from '@fortawesome/free-solid-svg-icons'
 import Usernav from './addon/Usernav'
 import axios from 'axios'
 
-
 function Marketpage() {
 
    
@@ -39,6 +38,8 @@ function Marketpage() {
 
     </Container>
     </header>
+
+
     </>
   )
 }

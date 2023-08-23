@@ -40,10 +40,19 @@
     padding-right: 20px;
     border-radius: 5px;
     margin-bottom: 10px;
-    cursor: pointer;
+
 }
 
-
+.problem{
+    word-wrap: break-word;
+    font-size: 18px;
+    display: flex;
+    border: 1px solid #d4d4d4;
+    flex-direction: row;
+    justify-content: space-between;
+    border-radius: 5px;
+    padding: 5px; 
+}
 
 .reForm:focus{
     border:1px solid #000000;
@@ -53,22 +62,17 @@
     box-shadow:0px 3px 0.5px 0px #474747;
 }
 
-
-.reproblem{
-    align-self: center;
-    border: #d4d4d4 1px solid;
-    padding: 20px;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    max-width:100%;
-    min-width: 50%;
-    margin-right: 20px;
-    background-color: #ffffff;
-    flex-direction: column;
+.reproblem
+{
     word-wrap: break-word;
-    white-space: pre-wrap ;
+    font-size: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
 
-    max-height: 40%;
+    margin-left: -80px;
 }
 
 .reAns{
@@ -179,3 +183,89 @@
     color: #474747;
     text-align: start;
 }
+
+@keyframes truck 
+{
+    0%{
+        transform: translateX(0px);
+    }
+    50%{
+        transform: translateX(100px);
+    }
+    100%{
+        transform: translateX(0px);
+    }
+}
+.truck{
+    animation: truck 1s infinite;
+}
+
+.imgpayment
+{
+    padding: 10px;
+    height: 500px;
+    max-width: none;
+    width: auto;
+    object-fit: cover;
+    border-radius: 5px;
+    border: #bebebe 1px dashed;
+}
+
+.upInput{
+    display: none;
+}
+
+.customFileUpload
+{
+    font-size: 20px;
+    padding: 20px;
+    width: 80%;
+    height: 100px;
+    text-align: center;
+    color: #474747;
+    border: #bebebe 1px dashed;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.customFileUpload:hover{
+    font-size: 20px;
+    padding: 20px;
+    width: 80%;
+    height: 100px;
+    text-align: center;
+    color: #474747;
+    border: #bebebe 1px dashed;
+    border-radius: 10px;
+    background-color: #e4e4e4;
+}
+
+
+.boxprice{
+    border-radius: 5px;
+    border: #bebebe 1px dashed;
+}
+
+
+
+
+.imgprice
+{
+    margin-top: 10px;
+    padding: 10px;
+    height: 400px;
+    min-width: 200px;
+    max-width: 400px;
+    width: auto;
+    object-fit: cover;
+    border-radius: 5px;
+    border: #bebebe 1px dashed;
+
+}
+
+.textpayment{
+    font-size: 18px;
+    font-weight: 600;
+    font-style:  italic;
+    color: #00aeff;
+}
+

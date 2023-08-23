@@ -48,6 +48,13 @@ function profile() {
 
   //   validation รูปภาพอัพโหลด
   const handleFileChange = (event) => {
+    var file1 = document.getElementById("customFile1");
+    var img = document.getElementById("imgprofile");
+
+    file1.addEventListener("change", function (e) {
+      img.src = URL.createObjectURL(e.target.files[0]);
+    });
+    
     const file = event.target.files[0];
     if (file) {
       const allowedTypes = ["image/jpeg", "image/png"];
@@ -165,6 +172,9 @@ function profile() {
   const handleclosephone = () => setShowphone(false);
   const handleclosename = () => setShowname(false);
   const handleclosegender = () => setShowgender(false);
+
+
+
 
   return (
     <div className="bg-light vh-100">
@@ -367,6 +377,7 @@ function profile() {
                     <Form>
                       <Form.Group>
                         <Image
+                         id="imgprofile"
                           src={accountprofileimage}
                           roundedCircle
                           className={styles.UiImgprofile}

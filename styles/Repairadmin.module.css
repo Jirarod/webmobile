@@ -1,0 +1,222 @@
+/* styles.css */
+.navtab {
+    justify-content: center;
+
+
+}
+
+.container {
+    padding: 10px;
+    margin-top: 40px;
+    width: 100%;
+    height: 75vh;
+    border: #eee 2px solid;
+    border-radius: 10px;
+
+    background-color: #f3f3f3;
+    overflow: auto;
+    flex-wrap: wrap;
+    display: flex;
+
+
+}
+.containerin {
+  padding: 10px;
+  margin-top: 40px;
+  max-height: 75vh; 
+
+
+  border-radius: 10px;
+
+  background-color: #ffffff;
+  overflow: auto;
+  flex-wrap: wrap;
+  display: flex;
+
+
+}
+
+.Form {
+    width: 100%;
+    border: #757575 1px solid;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+
+}
+
+.boxmodalimg { 
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    border: #eee 2px solid;
+    border-radius: 10px;
+    
+}
+
+.textmodalimg {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #757575;
+}
+
+.modalimg {
+    width: 70%;
+    border-radius: 10px;
+    aspect-ratio: 3/2;
+    object-fit: contain;
+}
+
+
+.divider {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .divider hr {
+    flex-grow: 1;
+    margin: 0;
+    border: none;
+    border-top: 2px solid #757575;
+  }
+  
+  .divider_text {
+    margin: 0 10px;
+    font-weight: bold;
+    font-size: 20px;
+  }
+
+  .boxslider
+  {
+    justify-content: center;
+    display: flex;
+  }
+
+
+  .boxleftadmin
+  {
+    border-right: 2px solid #E5E5E5;
+  }
+  
+  .time
+  {
+    border: #757575 1px solid;
+    
+  }
+ 
+  
+  .textstatus 
+  {
+    color: rgb(228,174,11);
+  }
+
+  .textstatusaccept
+  {
+    color: rgb(29,86,62);
+    transition: all 0.3s ease-in-out;
+  }
+
+  .textstatusreject
+  {
+    color: rgb(255,0,0);
+    transition: all 0.3s ease-in-out;
+  }
+  .iconcorrect
+  {
+    color: rgb(29,86,62);
+    transition: all 0.3s ease-in-out;
+  }
+
+  
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.rotate_icon {
+  animation: rotate 2s linear infinite; /* หมุนไอคอนเป็นเวลา 2 วินาที โดยไม่สิ้นสุด */
+}
+
+
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade2 {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.fade_icon {
+  animation: fade 1s ease-in-out; /* เล่น animation เป็นเวลา 1 วินาที โดยสิ้นสุด 1 */
+}
+
+.fade_icon2
+{
+  animation: fade2 1s ease-in-out; /* เล่น animation เป็นเวลา 1 วินาที โดยสิ้นสุด 1 */
+
+}
+
+.customInput::-webkit-inner-spin-button,
+.customInput::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+  display: none;
+}
+
+/* sRinprogess */
+.editicon
+{
+ cursor: pointer;
+}
+
+
+.customFileUpload {
+  font-size: 25px;
+  width: 80%;
+  margin-top: 10px;
+  text-align: center;
+  color: #474747;
+ 
+  border: dashed 2px  #686868;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.customFileUpload:hover {
+  border: dashed 2px  #070707;
+  background-color: #e4e4e4;
+}
+
+.upInput{
+   
+  display: none; /* ซ่อน input type file แทนที่จะใช้ label เปิดไฟล์ */
+
+}
+
+.croppedImage {
+  height: 100px;
+  max-width: none;
+  width: auto;
+  object-fit: cover;
+}

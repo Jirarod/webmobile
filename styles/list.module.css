@@ -189,15 +189,14 @@
     0%{
         transform: translateX(0px);
     }
-    50%{
-        transform: translateX(100px);
-    }
+   
     100%{
-        transform: translateX(0px);
+        transform: translateX(20px);
     }
 }
 .truck{
-    animation: truck 1s infinite;
+    animation: truck 4s infinite;
+    transition: all 0.3s ease-in-out;
 }
 
 .imgpayment
@@ -269,3 +268,9 @@
     color: #00aeff;
 }
 
+.textnotice{
+    font-size: 15px;
+    font-weight: 300;
+    font-style:  italic;
+    color: #919191;
+}

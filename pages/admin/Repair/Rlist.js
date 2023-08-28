@@ -161,6 +161,7 @@ function Rlist() {
           <Nav.Link href="/admin/Repair/RInprogess">รายการดำเนินการซ่อม</Nav.Link>
         </Nav.Item>
         <Nav.Item><Nav.Link href="/admin/Repair/Rpayment">รายการรอชำระ</Nav.Link></Nav.Item>
+        <Nav.Item><Nav.Link href="/admin/Repair/Rsuccess">รายการชำระเสร็จสิ้น</Nav.Link></Nav.Item>
       </Nav>
 
       <Container className={styles.container}>

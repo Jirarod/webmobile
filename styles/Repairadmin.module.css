@@ -220,3 +220,90 @@
   width: auto;
   object-fit: cover;
 }
+
+@keyframes rotate_icon
+{
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.rotate_icon {
+  
+  animation: rotate 2s linear infinite; /* หมุนไอคอนเป็นเวลา 2 วินาที โดยไม่สิ้นสุด */
+}
+
+
+.boxprice{
+  border-radius: 5px;
+  border: #bebebe 1px dashed;
+}
+
+
+
+
+.imgprice
+{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+  height: 400px;
+  min-width: 200px;
+  max-width: 400px;
+  width: auto;
+  object-fit: cover;
+  border-radius: 5px;
+  border: #bebebe 1px dashed;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+
+}
+
+.expanded {
+  transition: all 0.3s ease-in-out;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 1000;
+  transform: scale(1.5);
+  cursor: pointer;
+}
+
+.Modal{
+  transition: all 0.3s ease-in-out;
+}
+
+.input
+{
+  text-align: center  ;
+
+  border: #757575 1px solid;
+  border-radius: 10px;
+  padding: 1px;
+
+}
+
+.button
+{
+  border: #757575 1px solid;
+  border-radius: 10px;
+  padding: 1px;
+  background-color: #ffffff;
+  color: #757575;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.button:hover
+{
+  border: #757575 1px solid;
+  border-radius: 10px;
+  padding: 1px;
+  background-color: #757575;
+  color: #ffffff;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}

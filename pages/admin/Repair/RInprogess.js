@@ -150,7 +150,9 @@ function RInprogess() {
         </Nav.Item>
         <Nav.Item>
           <Nav.Link href="/admin/Repair/Rpayment">รายการรอชำระ</Nav.Link>
+
         </Nav.Item>
+        <Nav.Item><Nav.Link href="/admin/Repair/Rsuccess">รายการชำระเสร็จสิ้น</Nav.Link></Nav.Item>
       </Nav>
 
       <Container className={styles.containerin}>

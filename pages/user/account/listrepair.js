@@ -17,6 +17,7 @@ import {
   faEye,
   faTruck,
   faMoneyBill1,
+  faCheckCircle
 } from "@fortawesome/free-solid-svg-icons";
 import { set } from "react-hook-form";
 function listrepair() {
@@ -236,6 +237,8 @@ function listrepair() {
                               ? "text-danger mx-2 fw-bold"
                               : row.RSstatus === "ดำเนินการการซ่อม"
                               ? "text-success mx-2 fw-bold"
+                              : row.RSstatus === "ชำระเงินแล้ว"
+                              ? "text-success mx-2 fw-bold"
                               :  "text-warning mx-2 fw-bold"
                              
                           }`}
@@ -246,21 +249,45 @@ function listrepair() {
                               {row.RSstatus === "อยู่ระหว่างการส่งซ่อม" ? (
                                 <FontAwesomeIcon
                                   icon={faTruck}
-                                  className={styles.truck}
+                                  className={styles2.truck}
                                 />
                               ) : row.RSstatus === "รอการชำระเงิน" ? (
                                 <FontAwesomeIcon
                                   icon={faMoneyBill1}
-                                  className={styles.truck}
+                                  
                                 />
                               ) :   (
                                 ""
                               )}
 
+                              {row.RSstatus === "ชำระเงินแล้ว" ? (<><FontAwesomeIcon
+                                  icon={faCheckCircle}
+                               
+                                />  </>):null}
+
+
+
                
                             </Form.Label>
+                           
                           </Col>
+                          {row.RS_ad_trackid !== "" ? (
+                            
+                          <Col sm={6}>
+                            <Form.Label className={styles2.reTitle}>
+                              เลขพัสดุ :
+                            </Form.Label>
+                            <Form.Label className={styles2.resubTitle}>
+                              {row.RS_ad_trackid}
+                            </Form.Label>
+                          </Col>
+                          ) : (
+                            <></>
+                          )}
 
+
+                          {row.RSstatus === "ชำระเงินแล้ว" ? (<>
+                                 <p className={styles2.textnotice}> ลูกค้าติดตามเลขพัสดุได้ทางe-mailหรือหน้าwebที่สมัครไว้Adminจะทำการส่งภายใน24ชั่วโมง</p> </>):null}
                           {row.RSstatus === "รอการชำระเงิน" ? (
                             <Col
                               sm={6}

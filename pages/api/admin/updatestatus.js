@@ -16,6 +16,15 @@ export default async function updatestatus (req, res){
              res.status(200).json({ message: "success send" ,rows });
             }
 
+            if(RSstatus === "ตรวจสอบแล้ว"){
+                const [rows, field] = await pool.query("UPDATE repairservice SET RSstatus = ?  WHERE RSid = ?",["ชำระเงินแล้ว",RSid]);
+                console.log(rows)
+                    res.status(200).json({ message: "success send" ,rows });
+                    
+            }
+
+        
+
         }
         }
 

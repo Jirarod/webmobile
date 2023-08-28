@@ -89,7 +89,7 @@ function sidebar() {
                     </div>
 
                     <div className={styles.sidebar__listItem}>
-                        <a href="#" className={styles.sidebar__link}>
+                        <a href="/admin/Sale/addproduct" className={styles.sidebar__link}>
                             <FontAwesomeIcon icon={faStore} className={styles.sidebar__iconitem}/>
                             <span hidden={show} >รายการการขาย</span>
                         </a>

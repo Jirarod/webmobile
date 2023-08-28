@@ -17,30 +17,28 @@ export const uploadCloudinary = async (file) => {
         "https://api.cloudinary.com/v1_1/dsacsgwkl/image/upload",
         formData
     );
- 
-
     return {publicId:response?.data.public_id, url:response?.data.secure_url}
 }
 
-
-       
-
-
 function sellserviceupload() {
     const router = useRouter();
-    const {  Uid,
+    const { 
+    Uid,
     brand,
     model,
     problem,
     price,
     detail, } = router.query;
     
-   const [formUrlData, setFormUrlData] = useState({
+   const [formUrlData, setFormUrlData] = 
+   useState({
+
       img1: '',
       img2: '',
       img3: '',
       img4: '',
-      img5: '',
+      img5: '', 
+
     });
 
   
@@ -144,10 +142,7 @@ function sellserviceupload() {
 
 
 
- 
-
-       
-
+         
     const handleFileInputChange = (e) => {
         // เก็บรายชื่อไฟล์ที่ผู้ใช้เลือกใน state fileNames
         const selectedFiles = e.target.files;
@@ -155,10 +150,6 @@ function sellserviceupload() {
         setFileNames(selectedFileNames);
         setImages(selectedFiles);
       };
-    
-   
-     
-
     
 
 

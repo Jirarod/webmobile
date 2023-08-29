@@ -7,9 +7,7 @@ import axios from 'axios'
 
 function Marketpage() {
 
-   
- 
-    
+  
 
   return (
     <>
@@ -35,6 +33,9 @@ function Marketpage() {
             เลือกสมาร์ทโฟนที่เหมาะกับตัวคุณ
           </h4>
         </div>
+
+
+        
 
     </Container>
     </header>

@@ -130,3 +130,26 @@
     background-position: 200% center;
   }
 }
+
+.table {
+  background-color: #ccc;
+  
+
+}
+
+.tr{
+  padding: auto;
+  background-color: #fff;
+  padding-top: 30px;
+
+  border: #ffffff 2px solid;
+}
+
+
+
+.containertable{
+  padding: 10px;
+  margin-top: 40px;
+  max-height: 70vh; 
+  border-radius: 10px;
+}

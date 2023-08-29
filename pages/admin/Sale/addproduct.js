@@ -147,7 +147,7 @@ function addproduct() {
         </Nav.Item>
 
         <Nav.Item>
-          <Nav.Link href="/admin/Sale/allproduct">รายการคำสั่งซื้อ</Nav.Link>
+          <Nav.Link href="/admin/Sale/reqproduct">รายการคำสั่งซื้อ</Nav.Link>
         </Nav.Item>
       </Nav>
 
@@ -280,7 +280,7 @@ function addproduct() {
                 </Col>
                 </Row>
                 
-                  {loading ? (<><Row><div class={styles.loader}><p className={styles.textload}>กำลังเพิ่มสินค้า</p></div></Row></>):(<Row className="justify-content-end"><Button variant="success" className="mt-1 mx-3" style={{width:"40%"}} onClick={addproduct}>
+                  {loading ? (<><Row><div className={styles.loader}><p className={styles.textload}>กำลังเพิ่มสินค้า</p></div></Row></>):(<Row className="justify-content-end"><Button variant="success" className="mt-1 mx-3" style={{width:"40%"}} onClick={addproduct}>
           เพิ่มรายการสิ้นค้า<FontAwesomeIcon icon={faCartPlus} className="" />
         </Button></Row>)}
               

@@ -14,6 +14,8 @@ function otp() {
   const [otpInput, setOtpInput] = useState(""); // ตัวแปรที่จะใช้เก็บค่า OTP ที่ผู้ใช้กรอกเข้ามา
   const [next, setNext] = useState();
   const [id, setId] = useState("");
+  const [name, setName] = useState("");
+
 
 
 
@@ -24,6 +26,9 @@ function otp() {
     const token = localStorage.getItem("token");
     if (token) {
       const decoded = decode(token);
+
+      setName(decoded.Uname);
+   
       setEmail(decoded.email);
       setId(decoded.id);
       setCensoremail(
@@ -73,7 +78,7 @@ function otp() {
 
     // ส่งคำร้องขอไปยังแอปพลิเคชันของคุณเพื่อส่งอีเมล
     try {
-      await axios.post("/api/sendEmailapi", { emailTo, subject, text });
+      await axios.post("/api/sendEmailapi", { emailTo, subject, text,name});
     } catch (error) {
       console.error("Error sending email:", error);
     }

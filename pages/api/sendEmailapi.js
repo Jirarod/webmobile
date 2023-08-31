@@ -2,10 +2,10 @@ import { sendEmail } from "../lib/sendEmail";
 
 export default async function handler(req, res) {
     if (req.method === 'POST') {
-      const { emailTo, subject, text } = req.body;
+      const { emailTo, subject, text,name } = req.body;
   
       // ส่งอีเมลผ่าน Nodemailer
-      await sendEmail(emailTo, subject, text);
+      await sendEmail(emailTo, subject, text,name );
   
       res.status(200).json({ message: 'Email sent successfully!' });
     } else {

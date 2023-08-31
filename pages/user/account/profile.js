@@ -19,6 +19,7 @@ import Link from "next/link";
 import axios from "axios";
 
 import Usermenuaccount from "@/pages/addon/Usermenuaccount";
+import { set } from "react-hook-form";
 
 
 function profile() {
@@ -44,6 +45,7 @@ function profile() {
   const [birthday, setBirthday] = useState("");
 
 
+  const [preimg, setPreimg] = useState("");
   
 
   //   validation รูปภาพอัพโหลด
@@ -51,9 +53,8 @@ function profile() {
     var file1 = document.getElementById("customFile1");
     var img = document.getElementById("imgprofile");
 
-    file1.addEventListener("change", function (e) {
-      img.src = URL.createObjectURL(e.target.files[0]);
-    });
+
+    setPreimg(URL.createObjectURL(event.target.files[0]));
     
     const file = event.target.files[0];
     if (file) {
@@ -376,12 +377,17 @@ function profile() {
                   <Container className={styles.UiConprofile}>
                     <Form>
                       <Form.Group>
-                        <Image
+                        {preimg ? (<><Image
+                         id="imgprofile"
+                          src={preimg}
+                          roundedCircle
+                          className={styles.UiImgprofile}></Image></>):(<> <Image
                          id="imgprofile"
                           src={accountprofileimage}
                           roundedCircle
                           className={styles.UiImgprofile}
-                        />
+                        /></>)}
+                       
                       </Form.Group>
 
                       <Form.Group className="mt-4" as={Row}>

@@ -1,0 +1,16 @@
+.containerin {
+    padding: 10px;
+    margin-top: 40px;
+    max-height: 75vh; 
+  
+  
+    border-radius: 10px;
+  
+    background-color: #ffffff;
+    overflow: auto;
+    flex-wrap: wrap;
+    display: flex;
+  
+  
+  }
+ 

@@ -82,7 +82,7 @@ function sidebar() {
                     </div>
 
                     <div className={styles.sidebar__listItem}>
-                        <a href="#" className={styles.sidebar__link}>
+                        <a href="/admin/Purchase/Plist" className={styles.sidebar__link}>
                             <FontAwesomeIcon icon={faMobileScreenButton} className={styles.sidebar__iconitem}/>
                             <span hidden={show} >รายการการรับซื้อ</span>
                         </a>

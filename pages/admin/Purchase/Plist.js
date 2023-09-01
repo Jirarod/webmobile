@@ -63,8 +63,8 @@ function Plist() {
         <Container className={styles.containerin}>
 
 
-     {dataRows.map((row,index) => (
-      <Col sm={4} className="mt-3" key={index}>
+     {dataRows.map((row,index) => (<>
+      <Col sm={4} className="mt-3 px-2" key={index}>
         <Card>
         <Swiper
         effect={'flip'}
@@ -129,6 +129,9 @@ function Plist() {
       </Card.Footer>
         </Card>
       </Col>
+
+
+</>
         ))}
 
 

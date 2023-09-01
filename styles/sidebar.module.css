@@ -4,7 +4,7 @@
     top: 0;
     left: 0;
     bottom: 0;
-    width: 15%;
+    width: 25vh;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     z-index: 200;
@@ -118,7 +118,7 @@
 /* whensidebarmini  */
 .sidebar__mini
 {
-    width: 5%;
+    width: 10vh;
 }
 
 .sidebar__mini .sidebar__header
@@ -159,6 +159,7 @@
 }
 .sidebar__btnlogout__mini
 {
+
     padding: 10px 20px;
     border-radius: 5px;
     width: 100%;

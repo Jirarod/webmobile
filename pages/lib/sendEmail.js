@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer';
 
-export async function sendEmail(to, subject, text,name ) {
+export async function sendEmail(to, subject, text,name,img ) {
   const transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
@@ -333,7 +333,7 @@ export async function sendEmail(to, subject, text,name ) {
                   <tr>
                     <td style="text-align: center;">
                       <div class="text-author">
-                        
+                      <img src="${img}" alt="" style="width: 100px; max-width: 600px; height: auto; margin: auto; display: block;">
                         <h3 class="name">OTP</h3>
                         <span class="position"> โปรดระวัง  ถึงลูกค้าโดยe-Mail เป็นจากทางร้านยโดยตรง และกรุณาตรวจอาจมีผู้แอบอ้างเพื่อหลอกเอารหัสยืนยันตัวตนผ่าน อีเมลของท่าน กรุณกรอก OTP และอย่าให้ผู้อื่นทราบเด็ดขาด 
                                     หากลูกค้าพบความผิดปกติ สามารถแจ้งผ่าน ร้านsmile โทร 02-111-1111 ได้ตลอด 24 ชั่วโมง</span>

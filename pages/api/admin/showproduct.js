@@ -9,5 +9,9 @@ export default async function handle (req, res){
 
 
     }
+    else 
+    {
+        res.status(405).json({message: "We only support POST"});
+    }
 
 }

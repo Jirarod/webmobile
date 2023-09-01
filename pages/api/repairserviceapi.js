@@ -13,7 +13,11 @@ export default async function repairserviceapiapi (req, res){
           [id,barnd,model,problem,status,new Date()])
             res.status(200).json({message: 'Repair service added'})
     }
-
+    else
+    {
+        res.status(405).json({message: 'We only support POST'});
+    }
+    
 
     }
 

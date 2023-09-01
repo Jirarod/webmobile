@@ -5,7 +5,7 @@ function navbar() {
   return (
     <>
      <Navbar className={styles.navbar}>
-            <h1>Admin1111</h1>
+            <h1 >Admin1111</h1>
     </Navbar>
     </>
   )

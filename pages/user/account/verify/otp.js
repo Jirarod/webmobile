@@ -15,6 +15,7 @@ function otp() {
   const [next, setNext] = useState();
   const [id, setId] = useState("");
   const [name, setName] = useState("");
+  const [img, setImg] = useState("");
 
 
 
@@ -26,8 +27,10 @@ function otp() {
     const token = localStorage.getItem("token");
     if (token) {
       const decoded = decode(token);
-
-      setName(decoded.Uname);
+      console.log(decoded);
+   
+     setImg(decoded.image);
+      setName(decoded.name);
    
       setEmail(decoded.email);
       setId(decoded.id);
@@ -59,6 +62,7 @@ function otp() {
   };
 
   const handleSendOTP = async () => {
+  
     console.log(email);
     // สร้าง OTP ขึ้นมา (ให้เปลี่ยนส่วนนี้ตามที่คุณต้องการ)
     const generatedOtp = Math.floor(100000 + Math.random() * 900000);
@@ -78,7 +82,7 @@ function otp() {
 
     // ส่งคำร้องขอไปยังแอปพลิเคชันของคุณเพื่อส่งอีเมล
     try {
-      await axios.post("/api/sendEmailapi", { emailTo, subject, text,name});
+      await axios.post("/api/sendEmailapi", { emailTo, subject, text,name,img});
     } catch (error) {
       console.error("Error sending email:", error);
     }

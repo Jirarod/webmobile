@@ -76,8 +76,8 @@ function Rpayment() {
 
       <Container className={styles.container}>
       {dataRows.map((row, index) => (
-          <Col key={index} sm={4} className="m-1">
-            <Card>
+          <Col key={index} sm={4} className="d-flex justify-content-center pt-2">
+            <Card className={styles.cardpayment}>
               <Card.Body>
                 <Card.Title>รายการขอซ่อม {index + 1}</Card.Title>
                 <Form>
@@ -164,15 +164,20 @@ function Rpayment() {
                   </Form.Group>
 
                   
-                 {row.RSstatus === "รอการตรวจสอบ" ? (<><p className='text-end fs-6 fst-italic text-secondary'> กรุณาตรวจสอบการชำระเพื่อส่งรายการซ่อมคืนให้ลูกค้า</p><Form.Group class="d-flex justify-content-end"  ><Button className='' variant="primary" onClick={() => handleshow(row)}>
-                  ตรวจสอบการชำระเงิน
-                   </Button></Form.Group></>):(<> </>)}
+                 {row.RSstatus === "รอการตรวจสอบ" ? (<><p className='text-end fs-6 fst-italic text-secondary'> กรุณาตรวจสอบการชำระเพื่อส่งรายการซ่อมคืนให้ลูกค้า</p></>):(<> </>)}
                   
                
                 </Form>
                 
                
               </Card.Body>
+              <Card.Footer>
+              {row.RSstatus === "รอการตรวจสอบ" ? (<><Button className={styles.btnrepair} variant="primary" onClick={() => handleshow(row)}>
+                  ตรวจสอบการชำระเงิน
+                   </Button></>):(<> </>)}
+
+                </Card.Footer>
+    
             </Card>
           </Col>
         ))}
@@ -376,14 +381,6 @@ function Rpayment() {
                     
         </Modal.Footer>
         </Modal>
-
-        
-
-        
-
-
-
-
     </Layoutadmin>
   )
 }

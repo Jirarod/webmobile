@@ -166,8 +166,8 @@ function Rlist() {
 
       <Container className={styles.container}>
         {dataRows.map((row, index) => (
-          <Col key={index} sm={4} className="m-2">
-            <Card>
+          <Col key={index} sm={4} className="d-flex justify-content-center pt-2">
+            <Card className={styles.cardpayment}>
               <Card.Body>
                 <Card.Title>รายการขอซ่อม {index + 1}</Card.Title>
                 <Form>
@@ -248,21 +248,25 @@ function Rlist() {
                   </Form.Group>
 
                   <Form.Group as={Row}>
-                    <Col sm="7" className="text-start fw-bold"></Col>
+                    <Col sm="3" className="text-start fw-bold"></Col>
 
                     <Form.Label
                       column
-                      sm="5"
-                      className="text-danger fst-italic"
+                      sm="9"
+                      className="text-danger text-end fst-italic"
                     >
                       {dayjs(row.RStime).format("YYYY-MM-DD HH:mm:ss")}
                     </Form.Label>
                   </Form.Group>
                 </Form>
-                <Button variant="primary" onClick={() => handleshow(row)}>
+              
+               
+              </Card.Body>
+              <Card.Footer className=""> 
+              <Button className={styles.btnrepair} variant="primary" onClick={() => handleshow(row)}>
                   จัดการรายการซ่อม
                 </Button>
-              </Card.Body>
+                </Card.Footer>
             </Card>
           </Col>
         ))}

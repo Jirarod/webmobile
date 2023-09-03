@@ -4,7 +4,7 @@
     top: 0;
     left: 0;
     bottom: 0;
-    width: 25vh;
+    width: 30vh;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     z-index: 200;
@@ -54,7 +54,8 @@
 
 .sidebar__link
 {
-    transition: all 0.3s ease-in-out;
+
+ 
     text-decoration: none;
     color: #474747;
     font-size: 18px;
@@ -139,6 +140,7 @@
 
 .sidebar__link__mini
 {
+    transition: all 0.3s ease-in-out;
     justify-content: center;
 }
 

@@ -21,11 +21,24 @@ import {
   import 'swiper/css/pagination';
   import 'swiper/css/navigation';
 
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'; // เพิ่มนี้
+
+dayjs.extend(relativeTime); // เปิดใช้งาน relativeTime plugin
 import axios from 'axios'
 
 import styles from "@/styles/Purchaseadmin.module.css";
 function Plist() {
     const [dataRows, setDataRows] = useState([]);
+
+
+    const [data, setData] = useState([]); 
+
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = (row) => {
+      setData(row);
+      setShow(true)};
 
 
  
@@ -108,20 +121,38 @@ function Plist() {
             <Card.Text>
             ราคาที่ลูกค้าต้องการ {row.SSprice} บาท
             </Card.Text>
-
+          <Row>
+            <Col sm={6}>
             <Card.Text>
               ปัญหา {row.SSproblem} 
             </Card.Text>
+            </Col>
+            <Col sm={2}>
+
+            <Card.Text className='text-end'>
+            สถานะ
+            </Card.Text>
+            </Col>
+
+            <Col sm={4}>
+
+            <Card.Text className='text-start text-warning '>
+               {row.SSstatus}
+            </Card.Text>
+            </Col>
+
+          </Row>
+           
          
         </Card.Body>
         
         <Card.Footer>
-          <small className="text-muted">Last updated 3 mins ago</small>
+          <small className="text-muted">{dayjs(row.SStime).fromNow()}</small>
         </Card.Footer>
 
         <Card.Footer  >
             <div className="text-end">
-            <Button variant="primary" className='mx-2' >รับซื้อ</Button>
+            <Button variant="primary" className='mx-2' onClick={()=>handleShow(row)} >รับซื้อ</Button>
             <Button variant="danger">ปฏิเสธ</Button>
             </div>
            
@@ -133,6 +164,106 @@ function Plist() {
 
 </>
         ))}
+            
+            <Modal show={show}  onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered>
+        <Modal.Header closeButton>
+          <Modal.Title>รายละเอียดการรับซื้อ</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        <Form>
+         
+            <Form.Label column sm="12" className='text-center fs-3'>
+              รายการ
+            </Form.Label>
+
+            <Form.Group as={Row} className="mb-3">
+              <Form.Label column sm="2">
+                ยี่ห้อ
+              </Form.Label>
+              <Col sm="4">
+                <Form.Control plaintext readOnly defaultValue={data.SSbrand} />
+              </Col>
+              <Form.Label column sm="2">
+                รุ่น
+              </Form.Label>
+              <Col sm="4">
+                <Form.Control plaintext readOnly defaultValue={data.SSmodel} />
+              </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} className="mb-3">
+              <Form.Label column sm="2">
+                ปัญหา
+              </Form.Label>
+              <Col sm="4">
+                <Form.Control plaintext readOnly defaultValue={data.SSproblem} />
+              </Col>
+           
+              <Form.Label column sm="3">
+                ราคาที่ลูกค้าต้องการ
+              </Form.Label>
+              <Col sm="3">
+                <Form.Control plaintext readOnly defaultValue={data.SSprice} />
+              </Col>
+            </Form.Group> 
+            <Form.Group as={Row} className="mb-3">
+              <Form.Label column sm="2">
+                รายละเอียด
+              </Form.Label>
+              <Col sm="9">
+                <Form.Control className=' border rounded px-3 text-break bg-light' as="textarea" plaintext readOnly rows={2} placeholder="รายละเอียด" defaultValue={data.SSdetails}/>
+              </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} className="mb-3">
+              <Form.Label column sm="2">
+                ราคาที่รับซื้อ
+              </Form.Label>
+              <Col sm="4">
+                <Form.Control className='customInput' type="number" placeholder="ราคาที่รับซื้อเริ่มต้น" />
+              </Col>
+              <Col sm="1" className='text-center mt-1'>
+                <Form.Label >
+                  ถึง
+                </Form.Label>
+              </Col>
+              <Col sm="4">
+                <Form.Control className='customInput' type="number" placeholder="ราคาที่รับซื้อสิ้นสุด" />
+              </Col>
+
+
+
+
+            </Form.Group>
+
+                 <Form.Group as={Row} className="mb-3">
+              <Form.Label column sm="2">
+                รายละเอียด
+              </Form.Label>
+              <Col sm="9">
+                <Form.Control className='text-break' as="textarea"  rows={3} placeholder="รายละเอียดตอบกลับจากแอดมิน" />
+              </Col>
+            </Form.Group>
+
+
+
+        
+        </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            ปิด
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            บันทึก
+          </Button>
+        </Modal.Footer>
+      </Modal>
 
 
         </Container>

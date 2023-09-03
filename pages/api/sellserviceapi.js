@@ -6,9 +6,9 @@ export default async function sellserviceapi(req, res) {
       
     console.log(req.body);
        const  { Uid,brand,model,problem,price,detail,img1,img2,img3,img4,img5}  = req.body;
-         const [rows,field] = await pool.query('INSERT INTO sellservice (SS_Uid,SSbrand,SSmodel,SSproblem,SSprice,SSdetails,SSstatus,SSimg1,SSimg2,SSimg3,SSimg4,SSimg5) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)',
+         const [rows,field] = await pool.query('INSERT INTO sellservice (SS_Uid,SSbrand,SSmodel,SSproblem,SSprice,SSdetails,SSstatus,SStime,SSimg1,SSimg2,SSimg3,SSimg4,SSimg5) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)',
           [Uid,brand,model,problem,price,detail,
-            "รอการตอบรับ",img1,img2,img3,img4,img5])
+            "รอการตอบรับ",new Date(),img1,img2,img3,img4,img5])
             res.status(200).json({message: 'sell service success',rows})
     }
 

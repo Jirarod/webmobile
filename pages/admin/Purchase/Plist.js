@@ -23,6 +23,7 @@ import {
 
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'; // เพิ่มนี้
+import Swal  from 'sweetalert2';
 
 dayjs.extend(relativeTime); // เปิดใช้งาน relativeTime plugin
 import axios from 'axios'
@@ -33,6 +34,12 @@ function Plist() {
 
 
     const [data, setData] = useState([]); 
+
+    const [value1, setValue1] = useState();
+    const [value2, setValue2] = useState();
+    const [detialP, setDetialP] = useState();
+
+
 
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -52,11 +59,83 @@ function Plist() {
         try {
             const res = await axios.get("/api/admin/reqPurchase");
             setDataRows(res.data.rows);
-            console.log(res.data.rows);
+          
             } catch (err) {
             console.log(err);
             }
     }
+
+    const submit = async (e) => {
+        e.preventDefault();
+        const value = (`${value1} - ${value2}`);
+        try {
+            const res = await axios.post("/api/admin/resPurchaseback", {
+                id:data.SSid,
+                status:"ตอบรับการรับซื้อ",
+                price:value,
+                detail:detialP
+            });
+            if (await res.data.message == "success send") {
+              Swal.fire({
+                icon: 'success',
+                title: 'บันทึกสำเร็จ',
+                showConfirmButton: false,
+                timer: 1500
+              })
+            }
+            else{
+              Swal.fire({
+                icon: 'error',
+                title: 'บันทึกไม่สำเร็จ',
+                showConfirmButton: false,
+                timer: 1500
+              })
+            }
+            handleClose();
+            fetchdata();
+            }
+            catch (err) {
+            console.log(err);
+            }
+
+
+    };
+
+    const handlereject = async (e) => {
+        e.preventDefault();
+        try {
+            const res = await axios.post("/api/admin/resPurchaseback", {
+                id:data.SSid,
+                status:"ปฏิเสธการรับซื้อ",
+                price:null,
+                detail:null
+            });
+            if (await res.data.message == "success send") {
+              Swal.fire({
+                icon: 'success',
+                title: 'บันทึกสำเร็จ',
+                showConfirmButton: false,
+                timer: 1500
+              })
+          }
+          else{
+            Swal.fire({
+              icon: 'error',
+              title: 'บันทึกไม่สำเร็จ',
+              showConfirmButton: false,
+              timer: 1500
+            })
+          }
+          
+            handleClose();
+            fetchdata();
+            }
+            catch (err) {
+            console.log(err);
+            }
+
+
+    };
 
 
 
@@ -69,6 +148,10 @@ function Plist() {
       >
         <Nav.Item>
           <Nav.Link href="/admin/Purchase/Plist">รายการรับซื้อ</Nav.Link>
+        </Nav.Item>
+
+        <Nav.Item>
+          <Nav.Link href="/admin/Purchase/PInprogess">รายการกำลังดำเนินการ</Nav.Link>
         </Nav.Item>
         
       </Nav>
@@ -153,7 +236,7 @@ function Plist() {
         <Card.Footer  >
             <div className="text-end">
             <Button variant="primary" className='mx-2' onClick={()=>handleShow(row)} >รับซื้อ</Button>
-            <Button variant="danger">ปฏิเสธ</Button>
+            <Button variant="danger" onClick={handlereject}>ปฏิเสธ</Button>
             </div>
            
 
@@ -225,7 +308,7 @@ function Plist() {
                 ราคาที่รับซื้อ
               </Form.Label>
               <Col sm="4">
-                <Form.Control className='customInput' type="number" placeholder="ราคาที่รับซื้อเริ่มต้น" />
+                <Form.Control onChange={(e)=> setValue1(e.target.value)} className='customInput' type="number" placeholder="ราคาที่รับซื้อเริ่มต้น" />
               </Col>
               <Col sm="1" className='text-center mt-1'>
                 <Form.Label >
@@ -233,7 +316,7 @@ function Plist() {
                 </Form.Label>
               </Col>
               <Col sm="4">
-                <Form.Control className='customInput' type="number" placeholder="ราคาที่รับซื้อสิ้นสุด" />
+                <Form.Control onChange={(e)=> setValue2(e.target.value)}className='customInput' type="number" placeholder="ราคาที่รับซื้อสิ้นสุด" />
               </Col>
 
 
@@ -246,7 +329,7 @@ function Plist() {
                 รายละเอียด
               </Form.Label>
               <Col sm="9">
-                <Form.Control className='text-break' as="textarea"  rows={3} placeholder="รายละเอียดตอบกลับจากแอดมิน" />
+                <Form.Control onChange={(e)=> setDetialP(e.target.value)}className='text-break' as="textarea"  rows={3} placeholder="รายละเอียดตอบกลับจากแอดมิน" />
               </Col>
             </Form.Group>
 
@@ -259,7 +342,7 @@ function Plist() {
           <Button variant="secondary" onClick={handleClose}>
             ปิด
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={submit}>
             บันทึก
           </Button>
         </Modal.Footer>

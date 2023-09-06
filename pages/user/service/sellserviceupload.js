@@ -20,6 +20,8 @@ export const uploadCloudinary = async (file) => {
     return {publicId:response?.data.public_id, url:response?.data.secure_url}
 }
 
+
+
 function sellserviceupload() {
     const router = useRouter();
     const { 
@@ -119,13 +121,14 @@ function sellserviceupload() {
                         icon: 'success',
                         title: 'อัพโหลดสำเร็จ',
                         text: 'รอการตรวจสอบจากทางร้าน',
+                        timer: 1500
+                      })
+                      router.push('/user/account/listsell')
+
                         
-                      }).then((result) => {
-                        if (result.isConfirmed) {
-                          window.location.location = "/user/account/listsell"
-                        }
-                      }
-                        )
+                       
+                        
+                      
                 }
                 
             } catch (error) {

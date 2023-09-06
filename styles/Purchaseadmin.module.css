@@ -14,3 +14,50 @@
   
   }
  
+  
+.containertable{
+  padding: 10px;
+  margin-top: 40px;
+  max-height: 70vh; 
+  border-radius: 10px;
+}
+
+.tr{
+  text-align: center;
+}
+
+@keyframes truck 
+{
+    0%{
+        transform: translateX(0px);
+    }
+   
+    100%{
+        transform: translateX(20px);
+    }
+}
+.truckicon{
+  
+  width: 20px;
+  height: 20px; 
+  animation: truck 4s infinite;
+    transition: all 0.3s ease-in-out;
+
+}
+
+.editbtn
+{
+  background-color: #ffffff;
+  border: 1px solid #474747;
+  border-radius: 5px;
+  color: #474747;
+  width: 100px;
+  height: 30px;
+  transition: all 0.3s ease-in-out;
+}
+
+.editbtn:hover
+{
+  background-color: #474747;
+  color: #ffffff;
+}

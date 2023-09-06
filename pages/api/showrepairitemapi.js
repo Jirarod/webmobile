@@ -7,6 +7,7 @@ export default async function showrepairitemapi(req, res) {
         "SELECT * FROM repairservice WHERE RS_Uid = ?",
         [id]
         );
+        
         res.status(200).json({ rows });
     }
     }

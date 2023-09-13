@@ -153,6 +153,12 @@ function Plist() {
         <Nav.Item>
           <Nav.Link href="/admin/Purchase/PInprogess">รายการกำลังดำเนินการ</Nav.Link>
         </Nav.Item>
+
+        <Nav.Item>
+          <Nav.Link href="/admin/Purchase/Psuccess">
+            รายการเสร็จสิ้น
+          </Nav.Link>
+        </Nav.Item>
         
       </Nav>
 

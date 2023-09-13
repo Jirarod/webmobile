@@ -64,9 +64,6 @@ function listsell() {
 
 
 
-
-
-
   const [show, setShow] = useState(false);
   const [data, setData] = useState([]);
   const [tracking, setTracking] = useState([]); //เก็บค่า tracking number ที่ลูกค้ากรอก
@@ -164,6 +161,35 @@ function listsell() {
       }
     }
   };
+
+  const updatestatus = async (data,status) => {
+    try {
+      const res = await axios.post("/api/acceptsellservice", {
+        id:data.SSid,
+        status:status,
+     
+      });
+
+      if (await res.data.message == "success send") {
+        Swal.fire({
+          icon: 'success',
+          title: 'บันทึกสำเร็จ',
+          showConfirmButton: false,
+          timer: 1500
+        })
+
+        handleClose();
+        fetchData(id);
+
+      }
+
+    }
+    catch (err) {
+      console.log(err);
+    }
+
+
+  }
 
 
 
@@ -322,7 +348,17 @@ function listsell() {
                               ? "text-success text-center fw-bold"
                               : row.SSstatus === "รอการตอบรับ"
                               ? "text-warning text-center fw-bold"
-                              : "text-warning text-center fw-bold"
+                              : row.SSstatus === "ตรวจสอบแล้ว"
+                              ? "text-info text-center fw-bold":
+                              row.SSstatus === "ยืนยันการขาย"
+                              ? "text-success text-center fw-bold"
+                              :
+                              row.SSstatus === "ปฎิเสธการขาย"
+                              ? "text-danger text-center fw-bold"
+                              :
+                              row.SSstatus === "ชำระเงินเสร็จสิ้น"
+                              ? "text-success text-center fw-bold"
+                              :  "text-warning text-center fw-bold"
                           }`}
                             >
                               <Form.Label className={styles2.sellsubTitle}>
@@ -356,7 +392,51 @@ function listsell() {
                             </Form.Group>
                           ) : (
                             <></>
+
+
                           )}
+
+
+                          {row.SSstatus === "ตรวจสอบแล้ว" ? (<>
+                          <Form.Group as={Row} className="my-1">
+                            <p className="text-secondary fst-italic fw-light">
+                              ทางร้านได้มีการตรวจสอบของคุณแล้วกรุณาอ่านการตอบกลีบจากทางร้านและกรุณาตอบตกลงถ้าต้องการขาย
+                            </p>
+                            <Form.Label column sm="12"  className={styles2.reTitle}>
+                              รายละเอียดการตอบกลับจากทางร้าน
+                            </Form.Label>
+                            
+                            <Col sm={6} >
+                            <Form.Label column sm="12" className={styles2.sellinfo}>
+                              ราคาที่รับซื้อ : {row.SS_ad_apprise}
+                            </Form.Label>
+
+                            <Form.Label column sm="12" className={styles2.sellinfo1}>
+                              หมายเหตุ : {row.SS_ad_detail}
+                            </Form.Label>
+
+
+                            </Col>
+                            <Col sm={6} >
+                            <Form.Label column sm="12" className="fw-bold">
+                              ก่อนที่กดยืนยันซ่อมเพื่อเป็นการเปลี่ยนสถานะการขายของลูกค้า
+                            </Form.Label>
+
+                            <Form.Group as={Row} >
+                              <Col sm={1} ></Col>
+                              <Col sm={5} className="d-flex justify-content-center">
+                            <Button variant="success" className="mt-2" onClick={()=>updatestatus(row,"ยืนยันการขาย")}>ยืนยันการขาย</Button>
+                            </Col>
+                            <Col sm={5} className="d-flex justify-content-center">
+                            <Button variant="danger" className="mt-2" onClick={()=>updatestatus(row,"ปฎิเสธการขาย")}>ปฎิเสธการขาย</Button>
+                            </Col>
+                            <Col sm={1} ></Col>
+                            </Form.Group>
+                            </Col>
+
+                          </Form.Group>
+                          </>
+                          ):(null)}
                         </Form>
                       </>
                     </div>

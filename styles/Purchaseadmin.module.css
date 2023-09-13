@@ -61,3 +61,141 @@
   background-color: #474747;
   color: #ffffff;
 }
+
+.sellImg2
+{
+
+    border: #cfcece 1px dashed;
+    height: 200px;
+    max-width: none;
+    width: auto;
+    object-fit: cover;   
+    border-radius: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    cursor: pointer;
+    
+}
+.expanded {
+  transition: all 0.3s ease-in-out;
+  width: 300px;
+  height: 100%;
+  position: absolute;
+  z-index: 1000;
+  transform: scale(1.5);
+  cursor: pointer;
+}
+
+.expanded1 {
+  transition: all 0.3s ease-in-out;
+  width: 300px;
+  height: 100%;
+  position: absolute;
+  z-index: 1000;
+  transform: scale(1.5);
+  cursor: pointer;
+}
+
+.expanded2 {
+  transition: all 0.3s ease-in-out;
+  width: 300px;
+  height: 100%;
+  position: absolute;
+  z-index: 1000;
+  transform: scale(1.5);
+  cursor: pointer;
+}
+
+
+.divider {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.divider hr {
+  flex-grow: 1;
+  margin: 0;
+  border: none;
+  border-top: 2px solid #757575;
+}
+
+.divider_text {
+  margin: 0 10px;
+  font-weight: bold;
+  font-size: 20px;
+  }
+
+  .Containerinmodal
+  { 
+    padding-left:  40px;
+    padding-right: 40px;
+    
+  }
+
+  .lebel
+  {
+    font-size: 15px;
+    color: #474747;
+    font-weight: 500;
+    border-radius: 5px;
+    padding: 10px;
+    
+  }
+  .inputfile
+  {
+
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .slipImg
+  {
+    border: #cfcece 1px dashed;
+    height: 200px;
+    max-width: none;
+    width: auto;
+    object-fit: cover;   
+    border-radius: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    cursor: pointer;
+    
+  }
+  .btndetails
+  {
+
+    background-color: #ffffff;
+    border: 1px solid #474747;
+    border-radius: 5px;
+    color: #474747;
+    width: 150px;
+    height: 40px;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .text
+  {
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  .idcardimg{
+  
+    height: 300px;
+    max-width: none;
+    width: auto;
+    object-fit: cover;   
+    border-radius: 30px;
+    cursor: pointer;
+  }
+
+  .slipimg{
+    height: 500px;
+    max-width: none;
+    width: auto;
+    object-fit: cover;   
+    border-radius: 30px;
+   
+  }

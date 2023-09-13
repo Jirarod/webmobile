@@ -70,6 +70,7 @@ function RInprogess() {
           "https://api.cloudinary.com/v1_1/dsacsgwkl/image/upload",
           formData
         );
+        
         console.log(res.data.secure_url);
         const res2 = await axios.post("/api/admin/updatestatus", {
           RSid: data.RSid,

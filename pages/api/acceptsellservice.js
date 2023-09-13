@@ -7,11 +7,23 @@ export default async function acceptsellservice(req, res) {
             imgtrack,
             imgidcard,
             imgpayment } = req.body;
+        
+        if(status === "ยืนยันการขาย" || status === "ปฎิเสธการขาย")
+        {
+            const [rows, field] = await pool.query("UPDATE sellservice SET SSstatus = ? WHERE SSid = ?",
+            [status,id]
+            );
+            
+            res.status(201).json({ message: "success send"});
+
+        }
+        else{
         const [rows, field] = await pool.query("UPDATE sellservice SET SSstatus = ?,SSurltrack = ?,SSurlidcard = ?,SSurlpayment = ? WHERE SSid = ?",
         [status,imgtrack,imgidcard,imgpayment,id]
         );
         
         res.status(201).json({ message: "success send"});
+        }
       
     }
     }

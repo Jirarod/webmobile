@@ -94,7 +94,7 @@ function PInprogess() {
       
       try {
         
-        if(imageUrl){
+        if(imageUrl != "" ){
          const formData = new FormData();
          formData.append("file", selectedFile);
          formData.append("upload_preset", "Slipeduser");
@@ -126,8 +126,9 @@ function PInprogess() {
         }
 
   
-        }else{
+        }
 
+        if(status === "ตรวจสอบแล้ว"){
 
         const res = await axios.post("/api/admin/resPurchaseback", {
           id: data.SSid,

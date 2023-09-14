@@ -115,6 +115,7 @@ const handleShow = (row) => {
   console.log(row);
 }
 
+const [loading, setLoading] = useState(true);
 const [data, setData] = useState([]);
 const [dataRows, setDataRows] = useState([]);
 const [id, setId] = useState("");
@@ -135,10 +136,16 @@ const fetchData = async (id) => {
     const res = await axios.post("/api/showaddressapi", { id });
 
     setDataRows(res.data.rows);
+    setLoading(false);
   } catch (err) {
     console.log(err);
   }
 };
+
+
+if (loading) {
+  return <div>Loading...</div>; // หน้าโหลดข้อมูล
+}
 
 
 

@@ -33,11 +33,13 @@ function listrepair() {
     fetchData(id);
   }, [id]);
 
+  const [loading, setLoading] = useState(true);
   const fetchData = async (id) => {
     try {
       const res = await axios.post("/api/showrepairitemapi", { id });
       setDataRows(res.data.rows);
-      console.log(res.data);
+      setLoading(false);
+      
     } catch (err) {
       console.log(err);
     }
@@ -154,6 +156,9 @@ function listrepair() {
       console.log(err);
     }
   };
+  if (loading) {
+    return <div>Loading...</div>; // หน้าโหลดข้อมูล
+  }
 
 
   return (

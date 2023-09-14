@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye,faChevronLeft,faChevronCircleRight,faCheck,faTruck } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
 import { set } from "react-hook-form";
+import { useRouter } from "next/router";
 
 
 export const uploadCloudinary = async (file) => {
@@ -29,6 +30,8 @@ function listsell() {
   const [id, setId] = useState("");
   const [dataRows, setDataRows] = useState([]);
 
+const [loading5, setLoading5] = useState(false);
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     const decoded = decode(token);
@@ -42,7 +45,7 @@ function listsell() {
     try {
       const res = await axios.post("/api/showsellitemapi", { id });
       setDataRows(res.data.rows);
-      console.log(res.data.rows);
+      setLoading5(false);
     } catch (err) {
       console.log(err);
     }
@@ -63,7 +66,7 @@ function listsell() {
 
 
 
-
+  
   const [show, setShow] = useState(false);
   const [data, setData] = useState([]);
   const [tracking, setTracking] = useState([]); //เก็บค่า tracking number ที่ลูกค้ากรอก
@@ -191,6 +194,29 @@ function listsell() {
 
   }
 
+  const router = useRouter();
+     
+
+
+   const handlereciept = async (SSid) => {
+    try {
+      const res = await axios.post("/api/showreciept", {
+        SSid:SSid,
+      }
+      );
+      
+      router.push({
+        pathname: '/user/account/recieptsell',
+        query: { data: JSON.stringify(res.data.rows) }, // แปลงข้อมูลเป็น JSON เพื่อส่งผ่าน query parameter
+      });
+    }
+    catch (err) {
+      console.log(err);
+    }
+  }
+
+
+
 
 
 
@@ -266,6 +292,9 @@ function listsell() {
 
 
  }
+  }
+  if (loading5) {
+    return <div>Loading...</div>; // หน้าโหลดข้อมูล
   }
 
   return (
@@ -382,6 +411,24 @@ function listsell() {
                             ) : (
                               <></>
                             )}
+
+                            {row.SSstatus === "ชำระเงินเสร็จสิ้น" ? (
+
+                              <Col sm={1} className={styles2.sellBox}>
+                                <FontAwesomeIcon
+
+                                  icon={faEye}
+                                  className={styles2.sellIcon}
+                                  onClick={() => handlereciept(row.SSid)}
+                                />
+                              </Col>
+                            ) : (
+                              <></>
+                            )}
+
+
+
+
                           </Form.Group>
                           {row.SSstatus === "ตอบรับการรับซื้อ" ? (
                             <Form.Group as={Row} className="my-1">
@@ -394,6 +441,16 @@ function listsell() {
                             <></>
 
 
+                          )}
+
+                          {row.SSstatus === "ชำระเงินเสร็จสิ้น" ? (
+                            <Form.Group as={Row} className="my-1">
+                              <p className="text-secondary fst-italic fw-light">
+                                ทางร้านได้มีการชำระเงินแล้วลูกค้าสามารถดูรายละเอียดการชำระเงินได้โดยกดIcon
+                              </p>
+                              </Form.Group>
+                          ) : (
+                            <></>
                           )}
 
 

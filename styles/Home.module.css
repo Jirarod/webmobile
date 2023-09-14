@@ -9,7 +9,7 @@
     border-radius: 10px;
     padding: 0 20px;
     box-sizing: border-box;
-    overflow: hidden;
+    overflow-y: auto;
     font-family: 'Poppins', sans-serif;
 }
 .UinMeCon{
@@ -22,7 +22,7 @@
     height: 60vh;
     padding: 0 20px;
     box-sizing: border-box;
-    overflow: hidden;
+    overflow-y: auto;
 }
 /* profile select porfile */
 .UiConprofile{

@@ -8,29 +8,35 @@ import { decode } from "jsonwebtoken";
 import { useEffect, useState } from "react";
 import styles2 from "@/styles/list.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye,faChevronLeft,faChevronCircleRight,faCheck,faTruck } from "@fortawesome/free-solid-svg-icons";
+import {
+  faEye,
+  faChevronLeft,
+  faChevronCircleRight,
+  faCheck,
+  faTruck,
+} from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
 import { set } from "react-hook-form";
 import { useRouter } from "next/router";
-
 
 export const uploadCloudinary = async (file) => {
   const formData = new FormData();
   formData.append("file", file);
   formData.append("upload_preset", "Aboutsellservice");
   const response = await axios.post(
-      "https://api.cloudinary.com/v1_1/dsacsgwkl/image/upload",
-      formData
+    "https://api.cloudinary.com/v1_1/dsacsgwkl/image/upload",
+    formData
   );
-  return {publicId:response?.data.public_id, url:response?.data.secure_url}
-}
+  return { publicId: response?.data.public_id, url: response?.data.secure_url };
+};
 
+import ImagePopup from "@/pages/addon/ImagePopup";
 
 function listsell() {
   const [id, setId] = useState("");
   const [dataRows, setDataRows] = useState([]);
 
-const [loading5, setLoading5] = useState(false);
+  const [loading5, setLoading5] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -50,9 +56,8 @@ const [loading5, setLoading5] = useState(false);
       console.log(err);
     }
   };
-  
 
- const [imgtrack, setImgtrack] = useState([]);
+  const [imgtrack, setImgtrack] = useState([]);
   const [imgidcard, setImgidcard] = useState([]);
   const [imgpayment, setImgpayment] = useState([]);
 
@@ -62,11 +67,6 @@ const [loading5, setLoading5] = useState(false);
 
   const [loading, setLoading] = useState(false);
 
-
-
-
-
-  
   const [show, setShow] = useState(false);
   const [data, setData] = useState([]);
   const [tracking, setTracking] = useState([]); //เก็บค่า tracking number ที่ลูกค้ากรอก
@@ -95,20 +95,39 @@ const [loading5, setLoading5] = useState(false);
     }
   };
 
+  const reject = async (status) => {
+    try {
+      const res = await axios.post("/api/rejectsellservice", {
+        id: data.SSid,
+        status: status,
+      });
+
+      if ((await res.data.message) == "success send") {
+        Swal.fire({
+          icon: "success",
+          title: "บันทึกสำเร็จ",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        fetchData(id);
+        handleClose();
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+
   const [preimg, setPreimg] = useState(null);
   const handleFileChange = (event) => {
-
-
-
     setPreimg(URL.createObjectURL(event.target.files[0]));
-    
+
     const file = event.target.files[0];
-    console.log(file);  
+    console.log(file);
     if (file) {
       const allowedTypes = ["image/jpeg", "image/png"];
-     
 
-      if (allowedTypes.includes(file.type) ) {
+      if (allowedTypes.includes(file.type)) {
         setImgtrack(file);
       } else {
         // ไฟล์ไม่ใช่รูปภาพประเภท JPEG หรือ PNG หรือมีขนาดเกิน 1 MB
@@ -119,21 +138,16 @@ const [loading5, setLoading5] = useState(false);
     }
   };
 
-
   const [preimg1, setPreimg1] = useState(null);
   const handleFileChange1 = (event) => {
-
-
-
     setPreimg1(URL.createObjectURL(event.target.files[0]));
-    
+
     const file = event.target.files[0];
-    console.log(file);  
+    console.log(file);
     if (file) {
       const allowedTypes = ["image/jpeg", "image/png"];
-     
 
-      if (allowedTypes.includes(file.type) ) {
+      if (allowedTypes.includes(file.type)) {
         setImgidcard(file);
       } else {
         // ไฟล์ไม่ใช่รูปภาพประเภท JPEG หรือ PNG หรือมีขนาดเกิน 1 MB
@@ -147,14 +161,13 @@ const [loading5, setLoading5] = useState(false);
   const [preimg2, setPreimg2] = useState(null);
   const handleFileChange2 = (event) => {
     setPreimg2(URL.createObjectURL(event.target.files[0]));
-    
+
     const file = event.target.files[0];
-    console.log(file);  
+    console.log(file);
     if (file) {
       const allowedTypes = ["image/jpeg", "image/png"];
-     
 
-      if (allowedTypes.includes(file.type) ) {
+      if (allowedTypes.includes(file.type)) {
         setImgpayment(file);
       } else {
         // ไฟล์ไม่ใช่รูปภาพประเภท JPEG หรือ PNG หรือมีขนาดเกิน 1 MB
@@ -165,134 +178,116 @@ const [loading5, setLoading5] = useState(false);
     }
   };
 
-  const updatestatus = async (data,status) => {
+  const updatestatus = async (data, status) => {
     try {
       const res = await axios.post("/api/acceptsellservice", {
-        id:data.SSid,
-        status:status,
-     
+        id: data.SSid,
+        status: status,
       });
 
-      if (await res.data.message == "success send") {
+      if ((await res.data.message) == "success send") {
         Swal.fire({
-          icon: 'success',
-          title: 'บันทึกสำเร็จ',
+          icon: "success",
+          title: "บันทึกสำเร็จ",
           showConfirmButton: false,
-          timer: 1500
-        })
+          timer: 1500,
+        });
 
         handleClose();
         fetchData(id);
-
       }
-
-    }
-    catch (err) {
+    } catch (err) {
       console.log(err);
     }
-
-
-  }
+  };
 
   const router = useRouter();
-     
 
-
-   const handlereciept = async (SSid) => {
+  const handlereciept = async (SSid) => {
     try {
       const res = await axios.post("/api/showreciept", {
-        SSid:SSid,
-      }
-      );
-      
+        SSid: SSid,
+      });
+
       router.push({
-        pathname: '/user/account/recieptsell',
+        pathname: "/user/account/recieptsell",
         query: { data: JSON.stringify(res.data.rows) }, // แปลงข้อมูลเป็น JSON เพื่อส่งผ่าน query parameter
       });
-    }
-    catch (err) {
+    } catch (err) {
       console.log(err);
     }
-  }
+  };
 
-
-
-
-
-
-
-  const handlesubmit = async() =>{
-    if(imgtrack !==null  &&imgidcard!==null&& imgpayment !== null){
+  const handlesubmit = async () => {
+    if (imgtrack !== null && imgidcard !== null && imgpayment !== null) {
       try {
         setLoading(true);
         setLoading1(true);
         setLoading2(true);
         setLoading3(true);
 
-
-     
         const response = await uploadCloudinary(imgtrack);
 
-       
         if (response.url !== null) setLoading1(false);
 
         const response1 = await uploadCloudinary(imgidcard);
-        if (response1.url !== null) setLoading2(false); 
+        if (response1.url !== null) setLoading2(false);
 
         const response2 = await uploadCloudinary(imgpayment);
         if (response2.url !== null) setLoading3(false);
 
-
-       
         setLoading(false);
 
-    
-
         const res = await axios.post("/api/acceptsellservice", {
-          id:data.SSid,
-          status:"อยู่ระหว่างการส่งขาย",
-          imgtrack:response.url,
-          imgidcard:response1.url,
-          imgpayment:response2.url,
-
+          id: data.SSid,
+          status: "อยู่ระหว่างการส่งขาย",
+          imgtrack: response.url,
+          imgidcard: response1.url,
+          imgpayment: response2.url,
         });
 
-        if (await res.data.message == "success send") {
+        if ((await res.data.message) == "success send") {
           Swal.fire({
-            icon: 'success',
-            title: 'บันทึกสำเร็จ',
+            icon: "success",
+            title: "บันทึกสำเร็จ",
             showConfirmButton: false,
-            timer: 1500
-          })
+            timer: 1500,
+          });
 
           handleClose();
           fetchData(id);
-
         }
-
-      }
-      catch (err) {
+      } catch (err) {
         console.log(err);
       }
-    
-  }
-  else{
-    Swal.fire({
-      icon: 'error',
-      title: 'กรุณาอัพโหลดรูปภาพ',
-      text: 'กรุณาอัพโหลดรูปภาพ',
-
-    }).then((result) => {
-      if (result.isConfirmed) {
-        window.location.reload()
-      }
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "กรุณาอัพโหลดรูปภาพ",
+        text: "กรุณาอัพโหลดรูปภาพ",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.reload();
+        }
+      });
     }
-      )
-
-
-
- }
-  }
+    
+    
+  };
+  
+  
+  const [showPopup, setShowPopup] = useState(false);
+    const [selectedImage, setSelectedImage1] = useState(null);
+  
+    const openPopup = (imageUrl) => {
+      setSelectedImage1(imageUrl);
+      setShowPopup(true);
+    };
+  
+    const closePopup = () => {
+      setSelectedImage1(null);
+      setShowPopup(false);
+    };
   if (loading5) {
     return <div>Loading...</div>; // หน้าโหลดข้อมูล
   }
@@ -320,7 +315,6 @@ const [loading5, setLoading5] = useState(false);
                 <Col sm={12}>
                   {dataRows.map((row, index) => (
                     <div key={index}>
-                     
                       <>
                         <Form className={styles2.sellForm}>
                           <Form.Group as={Row}>
@@ -378,25 +372,27 @@ const [loading5, setLoading5] = useState(false);
                               : row.SSstatus === "รอการตอบรับ"
                               ? "text-warning text-center fw-bold"
                               : row.SSstatus === "ตรวจสอบแล้ว"
-                              ? "text-info text-center fw-bold":
-                              row.SSstatus === "ยืนยันการขาย"
+                              ? "text-info text-center fw-bold"
+                              : row.SSstatus === "ยืนยันการขาย"
                               ? "text-success text-center fw-bold"
-                              :
-                              row.SSstatus === "ปฎิเสธการขาย"
+                              : row.SSstatus === "ปฏิเสธการรับซื้อ" || row.SSstatus === "ปฏิเสธการขาย"
                               ? "text-danger text-center fw-bold"
-                              :
-                              row.SSstatus === "ชำระเงินเสร็จสิ้น"
+                              : row.SSstatus === "ยกเลิกการรับซื้อ"
+                              ? "text-danger text-center fw-bold"
+                              : row.SSstatus === "ชำระเงินเสร็จสิ้น"
                               ? "text-success text-center fw-bold"
-                              :  "text-warning text-center fw-bold"
+                              : "text-warning text-center fw-bold"
                           }`}
                             >
                               <Form.Label className={styles2.sellsubTitle}>
                                 {row.SSstatus}
-                                {row.SSstatus === "อยู่ระหว่างการส่งขาย" ? (
-                                <FontAwesomeIcon
-                                  icon={faTruck}
-                                  className={styles2.truck}
-                                />):(null)}
+                                {row.SSstatus === "อยู่ระหว่างการส่งขาย" ||
+                                row.SSstatus === "ส่งคืน" ? (
+                                  <FontAwesomeIcon
+                                    icon={faTruck}
+                                    className={styles2.truck}
+                                  />
+                                ) : null}
                               </Form.Label>
                             </Col>
 
@@ -413,10 +409,8 @@ const [loading5, setLoading5] = useState(false);
                             )}
 
                             {row.SSstatus === "ชำระเงินเสร็จสิ้น" ? (
-
                               <Col sm={1} className={styles2.sellBox}>
                                 <FontAwesomeIcon
-
                                   icon={faEye}
                                   className={styles2.sellIcon}
                                   onClick={() => handlereciept(row.SSid)}
@@ -426,7 +420,17 @@ const [loading5, setLoading5] = useState(false);
                               <></>
                             )}
 
-
+                            {row.SSstatus === "ส่งคืน" ? (
+                              <Col sm={1} className={styles2.sellBox}>
+                                <FontAwesomeIcon
+                                  icon={faEye}
+                                  className={styles2.sellIcon}
+                                  onClick={() => openPopup(row.SS_ad_urltrackback)}
+                                />
+                              </Col>
+                            ) : (
+                              <></>
+                            )}
 
 
                           </Form.Group>
@@ -439,8 +443,26 @@ const [loading5, setLoading5] = useState(false);
                             </Form.Group>
                           ) : (
                             <></>
+                          )}
 
+                          {row.SSstatus === "ส่งคืน" ? (
+                            <Form.Group as={Row} className="my-1">
+                              <p className="text-secondary fst-italic fw-light">
+                                ทางร้านได้มีการส่งคืนลูกค้าสามารถกดดูที่ไอคอนเพื่อดูสลิปการส่งคืน
+                              </p>
+                            </Form.Group>
+                          ) : (
+                            <></>
+                          )}
 
+                          {row.SSstatus === "ยกเลิกการรับซื้อ" ? (
+                            <Form.Group as={Row} className="my-1">
+                              <p className="text-secondary fst-italic fw-light">
+                                หลังจากที่ทางร้านได้ทำการยกเลิกการรับซื้อแล้วรอรับหลักฐานการส่งกลับได้ทางหน้าเว็บไซต์
+                              </p>
+                            </Form.Group>
+                          ) : (
+                            <></>
                           )}
 
                           {row.SSstatus === "ชำระเงินเสร็จสิ้น" ? (
@@ -448,52 +470,87 @@ const [loading5, setLoading5] = useState(false);
                               <p className="text-secondary fst-italic fw-light">
                                 ทางร้านได้มีการชำระเงินแล้วลูกค้าสามารถดูรายละเอียดการชำระเงินได้โดยกดIcon
                               </p>
-                              </Form.Group>
+                            </Form.Group>
                           ) : (
                             <></>
                           )}
 
+                          {row.SSstatus === "ตรวจสอบแล้ว" ? (
+                            <>
+                              <Form.Group as={Row} className="my-1">
+                                <p className="text-secondary fst-italic fw-light">
+                                  ทางร้านได้มีการตรวจสอบของคุณแล้วกรุณาอ่านการตอบกลีบจากทางร้านและกรุณาตอบตกลงถ้าต้องการขาย
+                                </p>
+                                <Form.Label
+                                  column
+                                  sm="12"
+                                  className={styles2.reTitle}
+                                >
+                                  รายละเอียดการตอบกลับจากทางร้าน
+                                </Form.Label>
 
-                          {row.SSstatus === "ตรวจสอบแล้ว" ? (<>
-                          <Form.Group as={Row} className="my-1">
-                            <p className="text-secondary fst-italic fw-light">
-                              ทางร้านได้มีการตรวจสอบของคุณแล้วกรุณาอ่านการตอบกลีบจากทางร้านและกรุณาตอบตกลงถ้าต้องการขาย
-                            </p>
-                            <Form.Label column sm="12"  className={styles2.reTitle}>
-                              รายละเอียดการตอบกลับจากทางร้าน
-                            </Form.Label>
-                            
-                            <Col sm={6} >
-                            <Form.Label column sm="12" className={styles2.sellinfo}>
-                              ราคาที่รับซื้อ : {row.SS_ad_apprise}
-                            </Form.Label>
+                                <Col sm={6}>
+                                  <Form.Label
+                                    column
+                                    sm="12"
+                                    className={styles2.sellinfo}
+                                  >
+                                    ราคาที่รับซื้อ : {row.SS_ad_apprise}
+                                  </Form.Label>
 
-                            <Form.Label column sm="12" className={styles2.sellinfo1}>
-                              หมายเหตุ : {row.SS_ad_detail}
-                            </Form.Label>
+                                  <Form.Label
+                                    column
+                                    sm="12"
+                                    className={styles2.sellinfo1}
+                                  >
+                                    หมายเหตุ : {row.SS_ad_detail}
+                                  </Form.Label>
+                                </Col>
+                                <Col sm={6}>
+                                  <Form.Label
+                                    column
+                                    sm="12"
+                                    className="fw-bold"
+                                  >
+                                    ก่อนที่กดยืนยันซ่อมเพื่อเป็นการเปลี่ยนสถานะการขายของลูกค้า
+                                  </Form.Label>
 
-
-                            </Col>
-                            <Col sm={6} >
-                            <Form.Label column sm="12" className="fw-bold">
-                              ก่อนที่กดยืนยันซ่อมเพื่อเป็นการเปลี่ยนสถานะการขายของลูกค้า
-                            </Form.Label>
-
-                            <Form.Group as={Row} >
-                              <Col sm={1} ></Col>
-                              <Col sm={5} className="d-flex justify-content-center">
-                            <Button variant="success" className="mt-2" onClick={()=>updatestatus(row,"ยืนยันการขาย")}>ยืนยันการขาย</Button>
-                            </Col>
-                            <Col sm={5} className="d-flex justify-content-center">
-                            <Button variant="danger" className="mt-2" onClick={()=>updatestatus(row,"ปฎิเสธการขาย")}>ปฎิเสธการขาย</Button>
-                            </Col>
-                            <Col sm={1} ></Col>
-                            </Form.Group>
-                            </Col>
-
-                          </Form.Group>
-                          </>
-                          ):(null)}
+                                  <Form.Group as={Row}>
+                                    <Col sm={1}></Col>
+                                    <Col
+                                      sm={5}
+                                      className="d-flex justify-content-center"
+                                    >
+                                      <Button
+                                        variant="success"
+                                        className="mt-2"
+                                        onClick={() =>
+                                          updatestatus(row, "ยืนยันการขาย")
+                                        }
+                                      >
+                                        ยืนยันการขาย
+                                      </Button>
+                                    </Col>
+                                    <Col
+                                      sm={5}
+                                      className="d-flex justify-content-center"
+                                    >
+                                      <Button
+                                        variant="danger"
+                                        className="mt-2"
+                                        onClick={() =>
+                                          updatestatus(row, "ปฎิเสธการขาย(ส่งคืน)")
+                                        }
+                                      >
+                                        ปฎิเสธการขาย
+                                      </Button>
+                                    </Col>
+                                    <Col sm={1}></Col>
+                                  </Form.Group>
+                                </Col>
+                              </Form.Group>
+                            </>
+                          ) : null}
                         </Form>
                       </>
                     </div>
@@ -504,330 +561,405 @@ const [loading5, setLoading5] = useState(false);
           </Col>
         </Row>
 
-        <Modal show={show} onHide={handleClose} size="xl"
+        <Modal
+          show={show}
+          onHide={handleClose}
+          size="xl"
           backdrop="static"
           keyboard={false}
-
-         aria-labelledby="contained-modal-title-vcenter">
+          aria-labelledby="contained-modal-title-vcenter"
+        >
           <Modal.Header closeButton>
             <Modal.Title>รายละเอียดการรับซื้อ</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <>
-            {page === 1 && (<>
-               Page {page}/2
-              <Form className={styles2.sellForm}>
-                <Form.Group as={Row} className="mb-2">
-                  <Col sm={5}>
-                    <img src={data.SSimg1} className={styles2.sellImg} />
-                  </Col>
-
-                  <Col sm={7} className={styles2.sellviewBox}>
-                    <Form.Group as={Row} className="text-center mb-2">
-                      <Col sm={12}>
-                        <h5>รายละเอียดการขาย</h5>
+              {page === 1 && (
+                <>
+                  Page {page}/2
+                  <Form className={styles2.sellForm}>
+                    <Form.Group as={Row} className="mb-2">
+                      <Col sm={5}>
+                        <img src={data.SSimg1} className={styles2.sellImg} />
                       </Col>
 
-                      <hr />
+                      <Col sm={7} className={styles2.sellviewBox}>
+                        <Form.Group as={Row} className="text-center mb-2">
+                          <Col sm={12}>
+                            <h5>รายละเอียดการขาย</h5>
+                          </Col>
+
+                          <hr />
+                        </Form.Group>
+
+                        <Form.Group as={Row}>
+                          <Col sm={6}>
+                            <Form.Label className={styles2.sellinfo}>
+                              ยี่ห้อ : {data.SSbrand}
+                            </Form.Label>
+                          </Col>
+                          <Col sm={6}>
+                            <Form.Label className={styles2.sellinfo}>
+                              รุ่น : {data.SSmodel}
+                            </Form.Label>
+                          </Col>
+                        </Form.Group>
+
+                        <Form.Group as={Row}>
+                          <Col sm={6}>
+                            <Form.Label className={styles2.sellinfo}>
+                              ปัญหา : {data.SSproblem}
+                            </Form.Label>
+                          </Col>
+                          <Col sm={6}>
+                            <Form.Label className={styles2.sellinfo}>
+                              ราคาที่ต้องการ : {data.SSprice}
+                            </Form.Label>
+                          </Col>
+                        </Form.Group>
+
+                        <Form.Group as={Row}>
+                          <Col sm={4}>
+                            <Form.Label className={styles2.sellinfo}>
+                              รายละเอียดเพิ่มเติม:
+                            </Form.Label>
+                          </Col>
+                          <Col sm={8}>
+                            <Form.Label className={styles2.sellinfo1}>
+                              {data.SSdetails}
+                            </Form.Label>
+                          </Col>
+                        </Form.Group>
+                      </Col>
                     </Form.Group>
 
-                    <Form.Group as={Row}>
-                      <Col sm={6}>
-                        <Form.Label className={styles2.sellinfo}>
-                          ยี่ห้อ : {data.SSbrand}
-                        </Form.Label>
-                      </Col>
-                      <Col sm={6}>
-                        <Form.Label className={styles2.sellinfo}>
-                          รุ่น : {data.SSmodel}
-                        </Form.Label>
-                      </Col>
-                    </Form.Group>
+                    <Form.Group as={Row} className="mb-2">
+                      <Form.Group as={Row} className="text-center mb-2">
+                        <h5>รายละเอียดการตอบกลับจากแอดมิน</h5>
+                        <hr />
+                      </Form.Group>
 
-                    <Form.Group as={Row}>
-                      <Col sm={6}>
-                        <Form.Label className={styles2.sellinfo}>
-                          ปัญหา : {data.SSproblem}
-                        </Form.Label>
-                      </Col>
-                      <Col sm={6}>
-                        <Form.Label className={styles2.sellinfo}>
-                          ราคาที่ต้องการ : {data.SSprice}
-                        </Form.Label>
-                      </Col>
-                    </Form.Group>
-
-                    <Form.Group as={Row}>
-                      <Col sm={4}>
-                        <Form.Label className={styles2.sellinfo}>
-                          รายละเอียดเพิ่มเติม:
-                        </Form.Label>
-                      </Col>
-                      <Col sm={8}>
-                        <Form.Label className={styles2.sellinfo1}>
-                          {data.SSdetails}
-                        </Form.Label>
-                      </Col>
-                    </Form.Group>
-                  </Col>
-                </Form.Group>
-
-                <Form.Group as={Row} className="mb-2">
-                  <Form.Group as={Row} className="text-center mb-2">
-                    <h5>รายละเอียดการตอบกลับจากแอดมิน</h5>
-                    <hr />
-                  </Form.Group>
-
-                  <Form.Group as={Row}>
-                    <Col sm={2}>
-                      <Form.Label className={styles2.sellinfo}>
-                        ราคาที่รับซื้อ :
-                      </Form.Label>
-                    </Col>
-                    <Col sm={4}>
-                      <Form.Label className={styles2.sellinfo}>
-                        {data.SS_ad_apprise}
-                      </Form.Label>
-                    </Col>
-                    <Col sm={2}>
-                      <Form.Label className={styles2.sellinfo}>
-                        สถานะ :
-                      </Form.Label>
-                    </Col>
-                    <Col sm={4}>
-                      <Form.Label className={styles2.sellinfo}>
-                        {data.SSstatus}
-                      </Form.Label>
-                    </Col>
-                  </Form.Group>
-
-                  <Form.Group as={Row}>
-                    <Col sm={3}>
-                      <Form.Label className={styles2.sellinfo}>
-                        รายละเอียดเพิ่มเติม:
-                      </Form.Label>
-                    </Col>
-                    <Col sm={9}>
-                      <Form.Label className={styles2.sellinfo1}>
-                        {data.SS_ad_detail}
-                      </Form.Label>
-                    </Col>
-                  </Form.Group>
-
-                  <Row>
-          
                       <Form.Group as={Row}>
-                        <Col sm={2} className="text-start">
+                        <Col sm={2}>
                           <Form.Label className={styles2.sellinfo}>
-                            ที่อยู่ส่งซ่อม:
+                            ราคาที่รับซื้อ :
                           </Form.Label>
                         </Col>
-                        <Col sm={5} className="text-start">
+                        <Col sm={4}>
                           <Form.Label className={styles2.sellinfo}>
-                            {" "}
-                            157/3 ถนนประชาธิปไตย ตำบลท่าพี่เลี้ยง อำเภอเมือง
-                            จังหวัดสุพรรณบุรี
+                            {data.SS_ad_apprise}
                           </Form.Label>
-                          
                         </Col>
-
-                        
-                      </Form.Group>
-                
-
-                 
-                  </Row>
-                  <p className="text-danger mt-2">
-                    **กรุณาใส่เลขรหัสพัสดุเพื่อให้แอดมินติดตามสถานะอุปกรณ์ที่ส่งขาย
-                    ก่อนที่กดยืนยันซ่อมเพื่อเป็นการเปลี่ยนสถานะการขายของลูกค้า{" "}
-                    {"("}หากไม่ต้องการส่งซ่อมให้ลูกค้าปฎิเสธการขาย{")"}
-                  </p>
-                </Form.Group>
-               
-              </Form></>
-            )}
-            {page === 2 && (
-              <>
-              Page {page}/2
-              <Form className={styles2.sellForm}>
-
-               <Row>
-                <Col sm={4} className="text-center">
-                <Form.Group as={Row} className="mb-2">
-                      <Form.Label column sm="12" className="text-center fs-bold">
-                       อัพโหลดหลักฐานการส่ง
-                      </Form.Label>
-                </Form.Group>
-                <Form.Group className="justify-content-center" as={Row}>
-                       <img src={preimg} className={styles2.sellImgpre} />
-                  </Form.Group>
-
-
-                <Form.Group className="mt-4" as={Row}>
-                        <Col sm="12" className="d-flex justify-content-center">
-                          <div className="btn btn-secondary btn-rounded">
-                            <label
-                              className="form-label text-white m-1"
-                              for="customFile1"
-                            >
-                              เลือกรูป
-                            </label>
-                            <input
-                              type="file"
-                              className="form-control d-none"
-                              id="customFile1"
-                              accept="image/jpeg, image/png"
-                              onChange={handleFileChange}
-                            />
-                          </div>
+                        <Col sm={2}>
+                          <Form.Label className={styles2.sellinfo}>
+                            สถานะ :
+                          </Form.Label>
                         </Col>
-                      </Form.Group>
-
-                      <Form.Group className="mt-4" as={Row}>
-                        <Col sm="12" className="d-flex justify-content-center">
-                          <Form.Label className={styles.UinSubTitle}>
-                           
-                            ไฟล์ที่รองรับ: .JPEG, .PNG.
+                        <Col sm={4}>
+                          <Form.Label className={styles2.sellinfo}>
+                            {data.SSstatus}
                           </Form.Label>
                         </Col>
                       </Form.Group>
-                
-                {loading ?(<>
-                {loading1 ? (<><Row><div className={styles2.loader}></div></Row></>
-                ):(<><Row><div className="justify-content-center"><FontAwesomeIcon style={{color:"#9625f3"}} size="2x" icon={faCheck}/></div></Row></>)
-                }</>):null}
-                </Col>
 
-
-                <Col sm={4} className="text-center">
-                <Form.Group as={Row} className="mb-2">
-                      <Form.Label column sm="12" className="text-center fs-bold">
-                       อัพโหลดรูปบัตรปชชโดยไม่ต้องแสดงเลขบัตรปชช
-                      </Form.Label>
-                </Form.Group>
-
-                <Form.Group className="justify-content-center" as={Row}>
-                       <img src={preimg1} className={styles2.sellImgpre} />
-                  </Form.Group>
-                
-                <Form.Group className="mt-4" as={Row}>
-                        <Col sm="12" className="d-flex justify-content-center">
-                          <div className="btn btn-secondary btn-rounded">
-                            <label
-                              className="form-label text-white m-1"
-                              for="customFile2"
-                            >
-                              เลือกรูป
-                            </label>
-                            <input
-                              type="file"
-                              className="form-control d-none"
-                              id="customFile2"
-                              accept="image/jpeg, image/png"
-                              onChange={handleFileChange1}
-                            />
-                          </div>
+                      <Form.Group as={Row}>
+                        <Col sm={3}>
+                          <Form.Label className={styles2.sellinfo}>
+                            รายละเอียดเพิ่มเติม:
+                          </Form.Label>
                         </Col>
-                      </Form.Group>
-
-                      <Form.Group className="mt-4" as={Row}>
-                        <Col sm="12" className="d-flex justify-content-center">
-                          <Form.Label className={styles.UinSubTitle}>
-                           
-                            ไฟล์ที่รองรับ: .JPEG, .PNG.
+                        <Col sm={9}>
+                          <Form.Label className={styles2.sellinfo1}>
+                            {data.SS_ad_detail}
                           </Form.Label>
                         </Col>
                       </Form.Group>
-                {loading ?(<>
-                {loading2 && loading? (<><Row><div className={styles2.loader}></div></Row></>
-                ):(<><Row><div className="justify-content-center"><FontAwesomeIcon style={{color:"#9625f3"}} size="2x" icon={faCheck}/></div></Row></>)
-                }</>):null}
-                </Col>
 
-
-                <Col sm={4} className="text-center">
-                <Form.Group as={Row} className="mb-2">
-                      <Form.Label column sm="12" className="text-center fs-bold">
-                       อัพโหลดช่องทางการรับเงิน
-                      </Form.Label>
-                </Form.Group>
-                <Form.Group className="justify-content-center" as={Row}>
-                       <img src={preimg2} className={styles2.sellImgpre} />
-                  </Form.Group>
-                <Form.Group className="mt-4" as={Row}>
-                        <Col sm="12" className="d-flex justify-content-center">
-                          <div className="btn btn-secondary btn-rounded">
-                            <label
-                              className="form-label text-white m-1"
-                              for="customFile3"
-                            >
-                              เลือกรูป
-                            </label>
-                            <input
-                              type="file"
-                              className="form-control d-none"
-                              id="customFile3"
-                              accept="image/jpeg, image/png"
-                              onChange={handleFileChange2}
-                            />
-                          </div>
-                        </Col>
-                      </Form.Group>
-                      
-
-                      <Form.Group className="mt-4" as={Row}>
-                        <Col sm="12" className="d-flex justify-content-center">
-                          <Form.Label>
-                           
-                            ไฟล์ที่รองรับ: .JPEG, .PNG.
+                      <Row>
+                        <Form.Group as={Row}>
+                          <Col sm={2} className="text-start">
+                            <Form.Label className={styles2.sellinfo}>
+                              ที่อยู่ส่งซ่อม:
+                            </Form.Label>
+                          </Col>
+                          <Col sm={5} className="text-start">
+                            <Form.Label className={styles2.sellinfo}>
+                              {" "}
+                              157/3 ถนนประชาธิปไตย ตำบลท่าพี่เลี้ยง อำเภอเมือง
+                              จังหวัดสุพรรณบุรี
+                            </Form.Label>
+                          </Col>
+                        </Form.Group>
+                      </Row>
+                      <p className="text-danger mt-2">
+                        **กรุณาใส่เลขรหัสพัสดุเพื่อให้แอดมินติดตามสถานะอุปกรณ์ที่ส่งขาย
+                        ก่อนที่กดยืนยันซ่อมเพื่อเป็นการเปลี่ยนสถานะการขายของลูกค้า{" "}
+                        {"("}หากไม่ต้องการส่งซ่อมให้ลูกค้าปฎิเสธการขาย{")"}
+                      </p>
+                    </Form.Group>
+                  </Form>
+                </>
+              )}
+              {page === 2 && (
+                <>
+                  Page {page}/2
+                  <Form className={styles2.sellForm}>
+                    <Row>
+                      <Col sm={4} className="text-center">
+                        <Form.Group as={Row} className="mb-2">
+                          <Form.Label
+                            column
+                            sm="12"
+                            className="text-center fs-bold"
+                          >
+                            อัพโหลดหลักฐานการส่ง
                           </Form.Label>
-                        </Col>
-                      </Form.Group>
-                {loading ?(<>
-                {loading3 && loading? (<><Row><div className={styles2.loader}></div></Row></>
-                ):(<><Row><div className="justify-content-center"><FontAwesomeIcon style={{color:"#9625f3"}} size="2x" icon={faCheck}/></div></Row></>)
-                }</>):(null)} 
-                </Col>
+                        </Form.Group>
+                        <Form.Group className="justify-content-center" as={Row}>
+                          <img src={preimg} className={styles2.sellImgpre} />
+                        </Form.Group>
 
-               </Row>
-                 
-                
+                        <Form.Group className="mt-4" as={Row}>
+                          <Col
+                            sm="12"
+                            className="d-flex justify-content-center"
+                          >
+                            <div className="btn btn-secondary btn-rounded">
+                              <label
+                                className="form-label text-white m-1"
+                                for="customFile1"
+                              >
+                                เลือกรูป
+                              </label>
+                              <input
+                                type="file"
+                                className="form-control d-none"
+                                id="customFile1"
+                                accept="image/jpeg, image/png"
+                                onChange={handleFileChange}
+                              />
+                            </div>
+                          </Col>
+                        </Form.Group>
 
-              </Form>
-              </>
+                        <Form.Group className="mt-4" as={Row}>
+                          <Col
+                            sm="12"
+                            className="d-flex justify-content-center"
+                          >
+                            <Form.Label className={styles.UinSubTitle}>
+                              ไฟล์ที่รองรับ: .JPEG, .PNG.
+                            </Form.Label>
+                          </Col>
+                        </Form.Group>
 
-            )}
-               
+                        {loading ? (
+                          <>
+                            {loading1 ? (
+                              <>
+                                <Row>
+                                  <div className={styles2.loader}></div>
+                                </Row>
+                              </>
+                            ) : (
+                              <>
+                                <Row>
+                                  <div className="justify-content-center">
+                                    <FontAwesomeIcon
+                                      style={{ color: "#9625f3" }}
+                                      size="2x"
+                                      icon={faCheck}
+                                    />
+                                  </div>
+                                </Row>
+                              </>
+                            )}
+                          </>
+                        ) : null}
+                      </Col>
+
+                      <Col sm={4} className="text-center">
+                        <Form.Group as={Row} className="mb-2">
+                          <Form.Label
+                            column
+                            sm="12"
+                            className="text-center fs-bold"
+                          >
+                            อัพโหลดรูปบัตรปชชโดยไม่ต้องแสดงเลขบัตรปชช
+                          </Form.Label>
+                        </Form.Group>
+
+                        <Form.Group className="justify-content-center" as={Row}>
+                          <img src={preimg1} className={styles2.sellImgpre} />
+                        </Form.Group>
+
+                        <Form.Group className="mt-4" as={Row}>
+                          <Col
+                            sm="12"
+                            className="d-flex justify-content-center"
+                          >
+                            <div className="btn btn-secondary btn-rounded">
+                              <label
+                                className="form-label text-white m-1"
+                                for="customFile2"
+                              >
+                                เลือกรูป
+                              </label>
+                              <input
+                                type="file"
+                                className="form-control d-none"
+                                id="customFile2"
+                                accept="image/jpeg, image/png"
+                                onChange={handleFileChange1}
+                              />
+                            </div>
+                          </Col>
+                        </Form.Group>
+
+                        <Form.Group className="mt-4" as={Row}>
+                          <Col
+                            sm="12"
+                            className="d-flex justify-content-center"
+                          >
+                            <Form.Label className={styles.UinSubTitle}>
+                              ไฟล์ที่รองรับ: .JPEG, .PNG.
+                            </Form.Label>
+                          </Col>
+                        </Form.Group>
+                        {loading ? (
+                          <>
+                            {loading2 && loading ? (
+                              <>
+                                <Row>
+                                  <div className={styles2.loader}></div>
+                                </Row>
+                              </>
+                            ) : (
+                              <>
+                                <Row>
+                                  <div className="justify-content-center">
+                                    <FontAwesomeIcon
+                                      style={{ color: "#9625f3" }}
+                                      size="2x"
+                                      icon={faCheck}
+                                    />
+                                  </div>
+                                </Row>
+                              </>
+                            )}
+                          </>
+                        ) : null}
+                      </Col>
+
+                      <Col sm={4} className="text-center">
+                        <Form.Group as={Row} className="mb-2">
+                          <Form.Label
+                            column
+                            sm="12"
+                            className="text-center fs-bold"
+                          >
+                            อัพโหลดช่องทางการรับเงิน
+                          </Form.Label>
+                        </Form.Group>
+                        <Form.Group className="justify-content-center" as={Row}>
+                          <img src={preimg2} className={styles2.sellImgpre} />
+                        </Form.Group>
+                        <Form.Group className="mt-4" as={Row}>
+                          <Col
+                            sm="12"
+                            className="d-flex justify-content-center"
+                          >
+                            <div className="btn btn-secondary btn-rounded">
+                              <label
+                                className="form-label text-white m-1"
+                                for="customFile3"
+                              >
+                                เลือกรูป
+                              </label>
+                              <input
+                                type="file"
+                                className="form-control d-none"
+                                id="customFile3"
+                                accept="image/jpeg, image/png"
+                                onChange={handleFileChange2}
+                              />
+                            </div>
+                          </Col>
+                        </Form.Group>
+
+                        <Form.Group className="mt-4" as={Row}>
+                          <Col
+                            sm="12"
+                            className="d-flex justify-content-center"
+                          >
+                            <Form.Label>ไฟล์ที่รองรับ: .JPEG, .PNG.</Form.Label>
+                          </Col>
+                        </Form.Group>
+                        {loading ? (
+                          <>
+                            {loading3 && loading ? (
+                              <>
+                                <Row>
+                                  <div className={styles2.loader}></div>
+                                </Row>
+                              </>
+                            ) : (
+                              <>
+                                <Row>
+                                  <div className="justify-content-center">
+                                    <FontAwesomeIcon
+                                      style={{ color: "#9625f3" }}
+                                      size="2x"
+                                      icon={faCheck}
+                                    />
+                                  </div>
+                                </Row>
+                              </>
+                            )}
+                          </>
+                        ) : null}
+                      </Col>
+                    </Row>
+                  </Form>
+                </>
+              )}
             </>
           </Modal.Body>
           <Modal.Footer>
-              {page === 1 ? (<>
-            <Button variant="secondary" onClick={handleClose}>
-              ปิด
-            </Button>
-             <Button variant="danger" onClick={handleClose}>
-             ปฎิเสธการซ่อม
-           </Button></>
-          ) : (
-            <Button variant="secondary" onClick={handleBack}>
-              กลับ
-            </Button>
-          )}
-          {page === 2 ? (
-            <><Button variant="danger" onClick={handleClose}>
-             ปฎิเสธการซ่อม
-           </Button>
-            <Button variant="primary" onClick={handlesubmit}>
-              บันทึก
-            </Button>
-             </>
-          ) : (
-            <Button variant="primary" onClick={handleNext}>
-              ถัดไป{"("}เพื่อยืนยันการส่งซ่อม{")"}
-            </Button>
-          )}
+            {page === 1 ? (
+              <>
+                <Button variant="secondary" onClick={handleClose}>
+                  ปิด
+                </Button>
+                <Button variant="danger" onClick={()=>reject("ปฏิเสธการขาย")}>
+                  ปฎิเสธการขาย
+                </Button>
+              </>
+            ) : (
+              <Button variant="secondary" onClick={handleBack}>
+                กลับ
+              </Button>
+            )}
+            {page === 2 ? (
+              <>
+                <Button variant="danger" onClick={()=>reject("ปฏิเสธการขาย")}>
+                  ปฎิเสธการขาย
+                </Button>
+                <Button variant="primary" onClick={handlesubmit}>
+                  บันทึก
+                </Button>
+              </>
+            ) : (
+              <Button variant="primary" onClick={handleNext}>
+                ถัดไป{"("}เพื่อยืนยันการขาย{")"}
+              </Button>
+            )}
           </Modal.Footer>
         </Modal>
+
+        {showPopup&& (
+        <ImagePopup imageUrl={selectedImage} onClose={closePopup} />
+      )}
       </Container>
     </>
   );

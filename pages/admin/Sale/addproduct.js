@@ -40,10 +40,13 @@ function addproduct() {
     detail: "",
     category: "",
     brand: "",
+    stock: "",
   });
 
 
+  const [isActive, setIsActive] = useState(true);
   const handleFileInputChange = (e) => {
+    
     const selectedFiles = e.target.files;
     const selectedFileNames = Array.from(selectedFiles).map(
       (file) => file.name
@@ -55,7 +58,8 @@ function addproduct() {
     setImgurl(selectedFileUrl);
     setFileNames(selectedFileNames);
     setImages(selectedFiles);
-    console.log(selectedFiles.length);
+    setIsActive(false);
+
   };
 
   const progressCircle = useRef(null);
@@ -85,6 +89,7 @@ function addproduct() {
         detail: formData.detail,
         category: formData.category,
         brand: formData.brand,
+        stock: formData.stock,
       });
     
       console.log(res.data);
@@ -195,11 +200,23 @@ function addproduct() {
                 </Col>
                 <Col sm={6}>
                   <Form.Group className="mb-3 fw-bolder">
+                    <Form.Label>จำนวน</Form.Label>
+                    <Form.Control type="number"  placeholder="กรุณาใส่จำนวน" 
+                    onChange={(e) => setFormData({...formData, stock: e.target.value})}
+                    />
+                  </Form.Group>
+
+                  
+                </Col>
+              </Row>
+
+              <Row>
+                <Form.Group className="mb-3 fw-bolder">
                     <Form.Label>ราคา</Form.Label>
                     <Form.Control type="number" className="customInput" placeholder="กรุณาใส่ราคา" 
                     onChange={(e) => setFormData({...formData, price: e.target.value})}/>
                   </Form.Group>
-                </Col>
+
               </Row>
 
               <Form.Group className="mb-3 fw-bolder">
@@ -211,9 +228,12 @@ function addproduct() {
           </Col>
           <Col sm={6}>
             <Form className="p-4">
-              <Form.Group className="mb-3 fw-bolder">
+              <Form.Group className="mb-3 fs-3 fw-bolder">
                 <Form.Label>รูปภาพสินค้า</Form.Label>
               </Form.Group>
+
+              <br/>
+              <br/>
                 
                 <Row>
                 <Col sm={3}>
@@ -280,7 +300,7 @@ function addproduct() {
                 </Col>
                 </Row>
                 
-                  {loading ? (<><Row><div className={styles.loader}><p className={styles.textload}>กำลังเพิ่มสินค้า</p></div></Row></>):(<Row className="justify-content-end"><Button variant="success" className="mt-1 mx-3" style={{width:"40%"}} onClick={addproduct}>
+                  {loading ? (<><Row><div className={styles.loader}><p className={styles.textload}>กำลังเพิ่มสินค้า</p></div></Row></>):(<Row className="justify-content-end"><Button variant="success" className="mt-1 mx-3" style={{width:"40%"}} onClick={addproduct} disabled={isActive}>
           เพิ่มรายการสิ้นค้า<FontAwesomeIcon icon={faCartPlus} className="" />
         </Button></Row>)}
               

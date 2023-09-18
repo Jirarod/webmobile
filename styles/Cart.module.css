@@ -1,0 +1,112 @@
+.Container
+{
+  margin-top: 10vh;
+  height: 100vh;
+
+}
+.Colmiddle
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: start;
+}
+
+.Cardimg{
+  border-radius: 10%;
+   border: 1px solid #ddd;
+    height: 150px;
+    max-width: none;
+    width: auto;
+    object-fit: cover;
+}
+.textlimit
+{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 20ch; /* จำกัดให้มีไม่เกิน 10 ตัวอักษร */
+}
+
+.maincontainer
+{
+ background-color: rgb(66, 87, 105);
+
+  height: 100vh;
+}
+
+.layoutcontainner{
+  display: flex;
+  max-height: 100vh; /*  Set min-height to make sure it fills the screen */
+  flex-direction: column;
+ 
+
+}
+
+
+
+.layoutcontainner__main{
+
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+
+
+
+}
+.layoutnav
+{
+  flex: 0 0 10vh;
+}
+
+.layoutcontainner__content{
+
+  /* flex: 1; */
+  flex-grow: 1; /* Fill remaining vertical space */
+  height: 75vh;
+ overflow: auto;
+  padding: 0px 50px 0 50px; ;
+ 
+
+  
+
+}
+.layoutcontainner__footer
+{
+  flex: 0 0 15vh;
+  
+  
+}
+.Containnerfooter{
+  border-top: 1px solid #cecece;
+  border-left: 1px solid #cecece;
+  border-right: 1px solid #cecece;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  padding: 0px 50px 0 50px; ;
+  height: 100%;
+  text-align: center;
+
+  
+}
+.Colmiddlefooter
+{
+  font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: start;
+    height: 15vh;
+}
+.Colendfooter
+{
+  font-size: 18px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: end;
+    height: 15vh;
+}
+

@@ -21,6 +21,7 @@ import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTruck, faPen } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
+import { set } from "react-hook-form";
 
 
 function PInprogess() {
@@ -83,6 +84,32 @@ function PInprogess() {
         }
       }
     };
+
+    const [imageUrl1, setImageUrl1] = useState('');
+    const [selectedFile1, setSelectedFile1] = useState(null);
+    const [isActive, setIsActive] = useState(true);
+  
+  
+    const handleFileChange1 = (event) => {
+      const file = event.target.files[0];
+      setImageUrl1(URL.createObjectURL(file));
+      setIsActive(false);
+      
+      if (file) {
+        const allowedTypes = ["image/jpeg", "image/png"];
+       
+  
+        if (allowedTypes.includes(file.type)) {
+          setSelectedFile1(file);
+        } else {
+          // ไฟล์ไม่ใช่รูปภาพประเภท JPEG หรือ PNG หรือมีขนาดเกิน 1 MB
+          console.error(
+            "ไฟล์ไม่ใช่รูปภาพประเภท JPEG หรือ PNG หรือมีขนาดเกิน 1 MB"
+          );
+        }
+      }
+    };
+
 
   const [expanded, setExpanded] = useState(false);
 
@@ -149,12 +176,86 @@ function PInprogess() {
         }
 
       }
-      window.location.reload();
+
+      if(status === "ยกเลิกการรับซื้อ"){
+        const res = await axios.post("/api/admin/resPurchaseback", {
+          id: data.SSid,
+          status: status,
+          price: '',
+          detail: note,
+        });
+
+        if (await res.data.message == "success send") {
+          Swal.fire({
+            icon: "success",
+            title: "บันทึกสำเร็จ",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          handleClose();
+          fetchData();
+        }
+      }
+
       } catch (err) {
         console.log(err);
       }
        
     }
+
+
+    const [show1, setShow1] = useState(false);
+    const handleClose1 = () => setShow1(false);
+    const [dataUP, setDataUP] = useState([]);
+    const handlesend = async (SSid) => {
+      try {
+        const res = await axios.post("/api/admin/viewinfoUPurchase", {
+          id: SSid,
+        });
+        setDataUP(res.data.rows[0]);
+        console.log(res.data.rows[0]);
+
+        setShow1(true);
+       
+      } catch (err) {
+        console.log(err);
+      }
+
+
+    }
+
+    const handlesendback = async () => {
+      try {
+   
+          const formData = new FormData();
+          formData.append("file", selectedFile1);
+          formData.append("upload_preset", "Aboutsellservice");
+          formData.append("cloud_name", "dsacsgwkl");
+          const resimg = await axios.post(
+            "https://api.cloudinary.com/v1_1/dsacsgwkl/image/upload",
+            formData
+          );
+          const url = resimg.data.secure_url;
+          console.log(resimg.data.secure_url);
+
+          const res = await axios.post("/api/admin/uploadpurchasetrackback", {
+            id: dataUP.SSid,
+            status: "ส่งคืน",
+            url: url,
+          });
+
+          window.location.href = "/admin/Purchase/Psucces";
+          fetchData();
+
+
+        
+      }
+      catch (err) {
+        console.log(err);
+      }
+    }
+
+
 
   
 
@@ -223,12 +324,14 @@ function PInprogess() {
                               ? "text-info text-center fw-bold"
                               : row.SSstatus === "ยืนยันการขาย"
                               ? "text-success text-center fw-bold"
-                              : row.SSstatus === "ปฎิเสธการขาย"
+                              : row.SSstatus === "ปฎิเสธการขาย"|| row.SSstatus === "ปฎิเสธการขาย(ส่งคืน)" 
+                              ? "text-danger text-center fw-bold" :
+                               row.SSstatus === "ยกเลิกการรับซื้อ"
                               ? "text-danger text-center fw-bold"
                               : "text-warning text-center fw-bold"
                           }`}
                   >
-                    {row.SSstatus}{" "}
+                    {row.SSstatus}{row.SSstatus == "ยกเลิกการรับซื้อ" || row.SSstatus == "ปฎิเสธการขาย(ส่งคืน)" ? (<p className={styles.textwarn}>(ทางร้านต้องส่งคืนโดยดูที่อยู่จัดส่งได้ในปุ่มดำเนินการและอัพโหลดหลักฐานการส่งคืน)</p>):(<></>)}
                     {row.SSstatus == "อยู่ระหว่างการส่งขาย" ? (
                       <FontAwesomeIcon
                         icon={faTruck}
@@ -237,12 +340,14 @@ function PInprogess() {
                     ) : null}
                   </td>
                   <td>
+                    {row.SSstatus == "ยกเลิกการรับซื้อ"|| row.SSstatus == "ปฎิเสธการขาย(ส่งคืน)" ? (<>
+                    <button className={styles.returnbtn} onClick={()=>handlesend(row.SSid)} >ส่งคืน</button></>):(
                     <button
                       onClick={() => handleShow(row)}
                       className={styles.editbtn}
                     >
                       แก้ไข
-                    </button>
+                    </button>)}
                   </td>
                 </tr>
               ))}
@@ -306,20 +411,23 @@ function PInprogess() {
                   สถานะ
                 </Form.Label>
                 <Col sm="4">
-                  <Form.Control as="select" defaultValue="Choose..." onChange={(e)=>setStatus(e.target.value)}>
+                  <Form.Control as="select" defaultValue="เลือกสถานะ" onChange={(e)=>setStatus(e.target.value)}>
+                    <option disabled>เลือกสถานะ</option>
                     <option>ตรวจสอบแล้ว</option>
-                    <option>อยู่ระหว่างการส่งกลับ</option>
+                 
                     <option>ยกเลิกการรับซื้อ</option>
                     <option>ชำระเสร็จสิ้น</option>
                   </Form.Control>
                 </Col>
-
+                
+                {status == "ยกเลิกการรับซื้อ" ? (<><Form.Label className="text-danger fst-italic" column sm="7">**หากต้องการยกเลิกการรับต้องบอกรายละเอีดว่าทำไมถึงยกเลิก</Form.Label></>):(<>
                 <Form.Label column sm="3">
                   ราคาที่ประเมิน(หลังตรวจสอบ)
                 </Form.Label>
                 <Col sm="4">
                   <Form.Control type="number" className="customInput" placeholder="ราคาที่ประเมิน" onChange={(e)=>setPrice(e.target.value)}/>
                 </Col>
+                </>)}
 
               </Form.Group>
 
@@ -378,6 +486,84 @@ function PInprogess() {
           </Button>
         </Modal.Footer>
       </Modal>
+
+
+
+
+      <Modal show={show1} onHide={handleClose1} size="xl" centered>
+        <Modal.Header closeButton>
+          <Modal.Title>ข้อมูลการส่งคืน</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group as={Row} >
+              <Form.Label className="text-center fw-bold fs-4" column sm="12">
+                ข้อมูลการส่งคืน
+              </Form.Label>
+              </Form.Group>
+
+              <Form.Group as={Row} className="mb-3">
+                <Col sm="6" className="border rounded-3 pb-2">
+                  <Form.Group as={Row}>
+                  <Form.Label column sm='3' className="fw-bold">ชื่อ-นามสกุล</Form.Label>
+                  <Form.Label column sm='9'>{dataUP.Uname}</Form.Label>
+                  </Form.Group>
+
+                  <Form.Group as={Row}>
+                  <Form.Label column sm='3' className="fw-bold">เบอร์โทรศัพท์</Form.Label>
+                  <Form.Label column sm='9'>{dataUP.Uphone}</Form.Label>
+                  </Form.Group>
+
+                  <Form.Group as={Row}>
+                  <Form.Label column sm='3' className="fw-bold">ที่อยู่ส่งคืน</Form.Label>
+                  <Form.Label column sm='9'>{dataUP.ADDaddress} {dataUP.ADDdistrict} {dataUP.ADDamphoe} {dataUP.ADDprovince} {dataUP.ADDzipcode}</Form.Label>
+                  </Form.Group>
+
+                  <Form.Group as={Row}>
+                  <Form.Label column sm='3' className="fw-bold">รายการที่ส่งคืน</Form.Label>
+                  <Form.Label column sm='9'>{dataUP.SSbrand} {dataUP.SSmodel}</Form.Label>
+                  </Form.Group>
+
+                  <Form.Group as={Row}>
+                  <Form.Label column sm='3' className="fw-bold">วันที่แจ้งขาย</Form.Label>
+                  <Form.Label column sm='9'>{dayjs(dataUP.SStime).format("DD/MM/YYYY")}</Form.Label>
+                  </Form.Group>
+
+
+
+                </Col>
+
+                <Col sm="6" className="border rounded-3 pb-2">
+                <Form.Group as={Row}>
+                  <Form.Label column sm='12' className="fw-bold text-center">อัพโหลดหลักฐานการส่ง</Form.Label>
+                  </Form.Group >
+                  <Form.Group as={Row} className="justify-content-center mb-2"> 
+                  {imageUrl1 ? (
+                  <img src={imageUrl1} className={styles.sellImg2} />
+                  ) : (null)}
+                </Form.Group>
+
+                    <Form.Control type="file"  className={styles.inputfile}
+                          onChange={handleFileChange1}/>
+
+                 
+
+                </Col>
+              </Form.Group>
+           
+            </Form>
+            </Modal.Body>
+            <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose1}>
+            ปิด
+          </Button>
+          <Button variant="primary" disabled={isActive} onClick={handlesendback}
+          >
+          ส่งคืน
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
     </Layoutadmin>
   );
 }

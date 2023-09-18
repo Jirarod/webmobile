@@ -10,7 +10,7 @@ export default async function handler(req, res) {
                 FROM sellservice
                 INNER JOIN users ON sellservice.SS_Uid = users.Uid
                 LEFT JOIN address ON sellservice.SS_Uid = address.ADD_Uid
-                WHERE sellservice.SSstatus IN ("ชำระเงินเสร็จสิ้น")`
+                WHERE sellservice.SSstatus IN ("ชำระเงินเสร็จสิ้น","ส่งคืน")`
             );
             console.log(rows)
             

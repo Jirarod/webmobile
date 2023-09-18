@@ -1,14 +1,16 @@
 import React,{useEffect,useState} from 'react'
 import {Container, Navbar,Popover,OverlayTrigger, Button,Dropdown,Nav} from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser } from '@fortawesome/free-solid-svg-icons'
-
+import { faUser,faCartShopping } from '@fortawesome/free-solid-svg-icons'
+import axios from 'axios'
 import Link from 'next/link'
 import { decode } from 'jsonwebtoken'
 function Usernav() {
    const [isLoggedIn, setIsLoggedIn] = useState(false);
    const [accountDetails, setAccountDetails] = useState('');
+   const [id, setId] = useState('');
 
+   const [numbercart,setNumbercart] = useState([]);
 
 
 
@@ -21,9 +23,7 @@ function Usernav() {
      window.location.href = '/Marketpage'
     }
 
-  
-
-   
+     
 
     useEffect(() => {
       const token = localStorage.getItem('token') //erorถ้ารีเฟรชหน้า
@@ -31,17 +31,45 @@ function Usernav() {
       
       if (token) {
         setIsLoggedIn(true)
+        setId(decoded.id)
         setAccountDetails(decoded.name)
+        fetchdata();
       } else {
         setIsLoggedIn(false)
         setAccountDetails('')
        }
-    }, [])
-
         
+    }, [id])
 
+     
+      const [loading, setLoading] = useState(true);
+         const fetchdata = async () => {
+      try{
+      const res = await axios.post("/api/numberincart",{userID : id});
+    
+      if (await res.data.message === "numbercart") {
+     
+        setNumbercart(res.data.rows[0].count);
+        setLoading(false);
+  
+      }else
+      {
+   
+      
+      }
+
+      }catch(err){
+        console.log(err);
+      }
+
+    };
+
+    if (loading) {
+      return <div className='loading'></div>; // หน้าโหลดข้อมูล
+    }
+    else{
   return (
-    <>
+    <div className='navuser'>
     <Navbar className='fixed-top border' bg='white' variant="dark" >
       <Container>
         
@@ -82,6 +110,15 @@ function Usernav() {
              Login
           </Navbar.Text></Link>
       )}
+
+      <Link className="text-decoration-none mx-3" href="/user/account/cart">
+      <div className='text-secondary border rounded-3 p-1 boxnumbercart'>
+      <FontAwesomeIcon icon={faCartShopping} className='mx-1 text-secondary'/>
+
+       Cart {numbercart == 0 ?(null):(<div className='numberincart'>{numbercart}</div>)}
+      </div>
+      </Link>
+
     </Navbar.Collapse>
     
 
@@ -90,8 +127,9 @@ function Usernav() {
     </Container>
 
     </Navbar>
-    </>
-  )
+    </div>
+  );
+      }
 }
 
-export default Usernav
+export default Usernav;

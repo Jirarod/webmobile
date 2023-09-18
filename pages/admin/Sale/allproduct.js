@@ -74,6 +74,7 @@ function allproduct() {
               <th>หมวดหมู่สินค้า</th>
               <th>วันที่เพิ่มสินค้า</th>
               <th>ราคา</th>
+              <th>จำนวน</th>
             </tr>
           </thead>
 
@@ -86,6 +87,7 @@ function allproduct() {
                 <td>{dayjs(row.PDdate).format('DD/MM/YYYY')}</td>
                 <td>{row.PDprice}
                 </td>
+                <td>{row.PDstock}</td>
                
               </tr>
             ))}

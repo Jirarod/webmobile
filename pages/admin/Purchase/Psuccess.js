@@ -94,13 +94,13 @@ function Psuccess() {
     >
       <thead>
         <tr>
-          <th>ลำดับ</th>
-          <th>ชื่อรายการ</th>
-          <th>ชื่อผู้ขาย</th>
-          <th>วันที่ขาย</th>
-          <th>ราคาที่รับซื้อ</th>
-          <th>สถานะ</th>
-          <th>รายละเอียด</th>
+          <th className='text-center'>ลำดับ</th>
+          <th className='text-center'>ชื่อรายการ</th>
+          <th className='text-center'>ชื่อผู้ขาย</th>
+          <th className='text-center'>วันที่ขาย</th>
+          <th className='text-center'>ราคาที่รับซื้อ</th>
+          <th className='text-center'>สถานะ</th>
+          <th className='text-center'>รายละเอียด</th>
         </tr>
 
       </thead>
@@ -112,11 +112,22 @@ function Psuccess() {
             <td className={styles.text}>{row.Uname}</td>
             <td className={styles.text}>{dayjs(row.SSdate).format('DD/MM/YYYY')}</td>
             <td className={styles.text}>{row.SS_ad_apprise}</td>
-            <td className={styles.text}>{row.SSstatus}</td>
+            <td className={`
+                          ${
+                            row.SSstatus === "ชำระเงินเสร็จสิ้น"
+                              ? "text-success text-center fw-bold"
+                              : row.SSstatus === "อยู่ระหว่างการส่งขาย"
+                              ? "text-warning text-center fw-bold"
+                            
+                              : "text-warning text-center fw-bold"
+                          } ${styles.text}`}>{row.SSstatus}</td>
             <td className={styles.text}>
-              <Button variant="primary" className={styles.btndetails} onClick={() => {
+              {row.SSstatus === "ชำระเงินเสร็จสิ้น" ? ( <Button variant="primary" className={styles.btndetails} onClick={() => {
                 handleShow(row);
-              }}>รายละเอียด</Button>
+              }}>รายละเอียด</Button>):(<Button variant="primary" className={styles.btndetails} disabled>รายการนี้ส่งคืน</Button>)}
+              
+             
+
             </td>
 
               

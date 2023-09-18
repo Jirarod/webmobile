@@ -101,11 +101,11 @@ function Plist() {
 
     };
 
-    const handlereject = async (e) => {
-        e.preventDefault();
+    const handlereject = async (datare) => {
+        
         try {
             const res = await axios.post("/api/admin/resPurchaseback", {
-                id:data.SSid,
+                id:datare.SSid,
                 status:"ปฏิเสธการรับซื้อ",
                 price:null,
                 detail:null
@@ -176,28 +176,37 @@ function Plist() {
         modules={[EffectFlip, Pagination, Navigation]}
         className="mySwiper"
       >
-
+        
+        {row.SSimg1 == "" ? <></> : 
         <SwiperSlide>
-
         <img cvariant="top" src={row.SSimg1} />
-
         </SwiperSlide>
+        }
 
+
+        {row.SSimg2 == "" ? <></> :
         <SwiperSlide>
         <img variant="top" src={row.SSimg2} />
         </SwiperSlide>
+        }
 
+        {row.SSimg3 == "" ? <></> :
         <SwiperSlide>
         <Card.Img variant="top" src={row.SSimg3} />
         </SwiperSlide>
+        }
 
+        {row.SSimg4 == "" ? <></> :
         <SwiperSlide>
         <Card.Img variant="top" src={row.SSimg4} />
         </SwiperSlide>
+        }
 
+        {row.SSimg5 == "" ? <></> :
         <SwiperSlide>
         <Card.Img variant="top" src={row.SSimg5} />
         </SwiperSlide>
+        }
 
         </Swiper>
        
@@ -242,7 +251,7 @@ function Plist() {
         <Card.Footer  >
             <div className="text-end">
             <Button variant="primary" className='mx-2' onClick={()=>handleShow(row)} >รับซื้อ</Button>
-            <Button variant="danger" onClick={handlereject}>ปฏิเสธ</Button>
+            <Button variant="danger" onClick={()=>handlereject(row)}>ปฏิเสธ</Button>
             </div>
            
 

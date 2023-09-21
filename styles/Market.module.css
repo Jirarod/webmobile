@@ -54,3 +54,9 @@
     white-space: nowrap;
     max-width: 20ch; /* จำกัดให้มีไม่เกิน 10 ตัวอักษร */
 }
+.Colmiddle
+{
+    justify-content: center;
+    align-content: center;
+    display: flex;
+}

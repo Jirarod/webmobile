@@ -120,7 +120,7 @@ function Marketpage() {
             <h2 className="mb-3 text-dark">สินค้าทั้งหมด</h2>
             <Row>
               {product.map((item) => (
-              <Col key={item} sm={2}>
+              <Col key={item} sm={3} className={styles.Colmiddle}>
                 <Card className={styles.Card} >
                   <div className={styles.Cardimgover}>
                   <Card.Img className={styles.Cardimg} variant="top" src={item.IMGurl.IMGurl} />

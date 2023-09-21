@@ -36,7 +36,7 @@ function listsell() {
   const [id, setId] = useState("");
   const [dataRows, setDataRows] = useState([]);
 
-  const [loading5, setLoading5] = useState(false);
+  const [loading5, setLoading5] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -51,7 +51,9 @@ function listsell() {
     try {
       const res = await axios.post("/api/showsellitemapi", { id });
       setDataRows(res.data.rows);
+      if(res.data.rows.length !== null){
       setLoading5(false);
+      }
     } catch (err) {
       console.log(err);
     }

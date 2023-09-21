@@ -3,9 +3,12 @@ import pool from "./Database";
 export default async function itemincart(req, res) {
     if (req.method === "POST") {
         const { userID } = req.body;
-        const insertQuery =
-        "SELECT * FROM cart INNER JOIN product ON cart.C_PDid = product.PDid WHERE C_Uid = ? AND C_status = ?";
-        const [rows] = await pool.query(insertQuery, [userID,"อยู่ในตระกร้า"]);
+        const insertQuery = `
+  SELECT * FROM cart
+  INNER JOIN product ON cart.C_PDid = product.PDid
+  WHERE C_Uid = ? AND C_status IN ('อยู่ในตระกร้า', 'รอการชำระเงิน')
+`;
+        const [rows] = await pool.query(insertQuery, [userID]);
 
         const combinedData = [];
 

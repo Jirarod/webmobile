@@ -134,9 +134,11 @@ useEffect(() => {
 const fetchData = async (id) => {
   try {
     const res = await axios.post("/api/showaddressapi", { id });
-
+    
+    if (await res.data.message === "Address show") {
     setDataRows(res.data.rows);
     setLoading(false);
+    }
   } catch (err) {
     console.log(err);
   }

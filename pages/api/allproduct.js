@@ -54,7 +54,7 @@ import pool from "./Database";
 
 export default async function updateprofileapi(req, res) {
   if (req.method === "GET") {
-    const [productRows] = await pool.query("SELECT * FROM product");
+    const [productRows] = await pool.query("SELECT * FROM product WHERE PDstock > 0 ");
     
 
     const combinedData = [];

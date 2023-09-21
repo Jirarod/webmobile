@@ -1,0 +1,121 @@
+.showadress
+{
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    border-radius: 10px;
+    height: 13vh;
+    border: 1px dashed #cccccc;
+    
+}
+.showadress span
+{
+    font-size: 20px;
+    font-weight: bold;
+    color: rgb(247, 149, 22);
+}
+
+.icon
+{
+    margin-right: 10px;
+    margin-left: 10px;
+    font-size: 25px;
+    color: rgb(247, 149, 22);
+
+}
+
+.showitem
+{
+    border: 1px dashed #cccccc; 
+    margin-top: 2vh;
+    padding: 20px;
+    border-radius: 10px;
+
+}
+
+.img
+{
+    max-width: 100px;
+    width: auto;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+.textlimit
+{
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 30ch; 
+}
+
+.Rowitemtotal
+{
+    margin-top: 2px;
+    border-top: 1px dashed #cccccc;
+    padding-top: 10px;
+}
+
+.showpayment{
+    border: 1px dashed #cccccc; 
+    margin-top: 5vh;
+    padding: 20px;
+    border-radius: 10px;
+}
+.boxpay
+{
+    margin-top: 1vh;
+    border-top: 1px dashed #cccccc ;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px dashed #cccccc ;
+}
+.imgpay
+{
+    height: 300px;
+    max-width: 100%;
+    width: auto;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.maincontainer
+{
+ background-color: rgb(66, 87, 105);
+
+  height: 100vh;
+}
+
+.layoutcontainner{
+  display: flex;
+  max-height: 100vh; /*  Set min-height to make sure it fills the screen */
+  flex-direction: column;
+  overflow: auto;
+
+}
+
+
+
+.layoutcontainner__main{
+
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+
+
+
+}
+.layoutnav
+{
+  flex: 0 0 10vh;
+}
+
+.layoutcontainner__content{
+
+  /* flex: 1; */
+  flex-grow: 1; /* Fill remaining vertical space */
+  height: 100vh;
+
+  
+
+}

@@ -43,7 +43,7 @@ function Usernav() {
 
      
       const [loading, setLoading] = useState(true);
-         const fetchdata = async () => {
+      const fetchdata = async () => {
       try{
       const res = await axios.post("/api/numberincart",{userID : id});
     

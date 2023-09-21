@@ -88,6 +88,46 @@ function cart() {
       }
     };
 
+    const handledel = async (Cid) => {
+      try
+      {
+        const res = await axios.post("/api/delincart",{Cid : Cid});
+          fetchdata();
+          window.location.reload();
+
+        
+      }
+      catch(err)
+      {
+        console.log(err);
+      }
+
+      
+    };
+
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      console.log(selectedProducts);
+      try
+      {
+        const res = await axios.post("/api/confirmorder",{selectedProducts : selectedProducts});
+     
+        if(await res.data.message === "order confirm")
+        {
+          window.location.href = '/checkout';
+        }
+        
+      }
+      catch(err)
+      {
+        console.log(err);
+      }
+
+      
+    };
+
+
+
 
 
 
@@ -135,7 +175,7 @@ function cart() {
                     <Card.Title>฿{parseInt(item.product.PDprice).toLocaleString()}</Card.Title>
                     </Col>
                     <Col sm={1} className={styles.Colmiddle}>
-                    <Button variant="danger">X</Button>
+                    <Button variant="danger" onClick={()=>handledel(item.product.Cid)}>X</Button>
                     </Col>
 
                     
@@ -170,7 +210,7 @@ function cart() {
               </Col>
               
               <Col sm={2} className={styles.Colmiddlefooter}>
-              <Button variant="success" >ยืนยันการซื้อ</Button>
+              <Button variant="success" onClick={handleSubmit} >ยืนยันการซื้อ</Button>
               </Col>
               </Row>
 

@@ -59,7 +59,7 @@ function allproduct() {
         </Nav.Item>
 
         <Nav.Item>
-          <Nav.Link href="/admin/Sale/req">รายการคำสั่งซื้อ</Nav.Link>
+          <Nav.Link href="/admin/Sale/reqproduct">รายการคำสั่งซื้อ</Nav.Link>
         </Nav.Item>
       </Nav>
 
@@ -69,12 +69,13 @@ function allproduct() {
         <Table id="myTable" hover variant="white" striped ref={tableRef} className={styles.table}>
           <thead>
             <tr>
-              <th>#</th>
-              <th>ชื่อสินค้า</th>
-              <th>หมวดหมู่สินค้า</th>
-              <th>วันที่เพิ่มสินค้า</th>
-              <th>ราคา</th>
-              <th>จำนวน</th>
+              <th className='text-center'>#</th>
+              <th className='text-center'> ชื่อสินค้า</th>
+              <th className='text-center'>หมวดหมู่สินค้า</th>
+              <th className='text-center'>วันที่เพิ่มสินค้า</th>
+              <th className='text-center'>ราคา</th>
+              <th className='text-center'>จำนวน</th>
+              <th className='text-center'>แก้ไข</th>
             </tr>
           </thead>
 
@@ -87,7 +88,12 @@ function allproduct() {
                 <td>{dayjs(row.PDdate).format('DD/MM/YYYY')}</td>
                 <td>{row.PDprice}
                 </td>
-                <td>{row.PDstock}</td>
+                <td>{row.PDstock}
+                {row.PDstock === 0 ? (<span className='text-danger'> (หมด) </span>):(null)}
+                </td>
+                <td>
+                  <button className='btn btn-warning'>แก้ไข</button>
+                </td>
                
               </tr>
             ))}

@@ -36,6 +36,7 @@ function Usernav() {
         fetchdata();
       } else {
         setIsLoggedIn(false)
+        setLoading(false);
         setAccountDetails('')
        }
         
@@ -111,6 +112,8 @@ function Usernav() {
           </Navbar.Text></Link>
       )}
 
+
+{isLoggedIn ? (
       <Link className="text-decoration-none mx-3" href="/user/account/cart">
       <div className='text-secondary border rounded-3 p-1 boxnumbercart'>
       <FontAwesomeIcon icon={faCartShopping} className='mx-1 text-secondary'/>
@@ -118,6 +121,8 @@ function Usernav() {
        Cart {numbercart == 0 ?(null):(<div className='numberincart'>{numbercart}</div>)}
       </div>
       </Link>
+):(null)}
+
 
     </Navbar.Collapse>
     

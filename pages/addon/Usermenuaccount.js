@@ -65,7 +65,7 @@ function Usermenuaccount() {
           </Link>
 
           <FontAwesomeIcon icon={faClipboardList} className="mx-2" /> รายการของฉัน
-          <li className={styles.Uinli}> รายการสั่งซื้อ</li>
+          <Link href="/user/account/listbuy"><li className={styles.Uinli}> รายการสั่งซื้อ</li> </Link>
           <Link href="/user/account/listrepair"><li className={styles.Uinli}> รายการซ่อม</li></Link>
           <Link href="/user/account/listsell"><li className={styles.Uinli}> รายการขาย</li></Link>
 

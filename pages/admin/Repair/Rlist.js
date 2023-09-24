@@ -133,6 +133,8 @@ function Rlist() {
  
  };
 
+
+
  const getStatusIcon = () => {
   if (repairStatus === "ตอบรับคำขอซ่อม") {
     return <><FontAwesomeIcon icon={faCircleCheck} className={`text-success mx-2 ${styles.fade_icon2}`} />{repairStatus} </> ;

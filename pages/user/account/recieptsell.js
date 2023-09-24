@@ -13,32 +13,6 @@ function recieptsell() {
 
   const parsedData = JSON.parse(data);
 
-//   const parsedData = ([{
-//     SSid: 1,
-//     SS_Uid: 1,
-//     SSbrand: "Apple",
-//     SSmodel: "iPhone 12 Pro Max",
-//     SSgeneration: "12 Pro Max",
-//     SScolor: "Gold",
-//     SScapacity: "256 GB",
-//     SSimage: "https://i.imgur.com/3Z1Qq8v.png",
-//     SS_ad_apprise: 20000,
-//     SSstatus: "ชำระเงินเสร็จสิ้น",
-//     SStime: "2021-08-01T17:00:00.000Z",
-//     Uid: 1,
-//     Uname: "สมชาย ใจดี",
-//     Uemail: "",
-//     Uphone: "0987654321",
-//     Uimage: "https://i.imgur.com/3Z1Qq8v.png",
-//     ADDid: 1,
-//     ADDadrress: "157/3 ถนนประชาธิปไตย",
-//     ADDdistrict: "ท่าพี่เลี้ยง",
-//     ADDprovince: "สุพรรณบุรี",
-//     ADDzipcode: "72000",
-
-
-//   }]);
-
 
 
    

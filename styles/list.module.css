@@ -335,3 +335,34 @@
     object-fit: cover;
 
    }
+   .rowitem
+   {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border: 1px solid #d4d4d4;
+    border-radius: 5px;
+    padding: 10px 0px 10px 0px;
+   }
+
+   .UinName
+    {
+     font-size: 16px;
+     font-weight: 400;
+     color: #474747;
+     margin-left: 10px;
+    }
+  .iconeye
+  {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 20px;
+    color: #1f7df8;
+  }
+    .iconeye:hover
+    {
+        margin-left: 10px;
+        margin-right: 10px;
+        font-size: 20px;
+        color: #000000;
+        cursor: pointer;
+    }

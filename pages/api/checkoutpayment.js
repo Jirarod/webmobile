@@ -25,8 +25,8 @@ export default async function checkoutpayment(req, res) {
 
             //เพิ่มสินค้าในตาราง payment
             const insertQuery2 =
-            "INSERT INTO payment (PAY_Uid, PAY_ADDid, PAY_PDid, PAY_numberproduct, PAY_total, PAY_Sliped, PAY_status) VALUES (?, ?, ?, ?, ?, ?, ?)";
-            const [rows3] = await pool.query(insertQuery2, [userID,addressID,product.product.C_PDid,product.product.C_numberproduct,total,img,"รอผู้ขายจัดส่ง"]);
+            "INSERT INTO payment (PAY_Uid, PAY_ADDid, PAY_PDid, PAY_numberproduct, PAY_total, PAY_Sliped, PAY_status) VALUES (?, ?, ?, ?, ? + 50, ?, ?)";
+            const [rows3] = await pool.query(insertQuery2, [userID,addressID,product.product.C_PDid,product.product.C_numberproduct,product.product.PDprice,img,"รอผู้ขายจัดส่ง"]);
             
            }
         res.status(200).json({message:"checkoutpayment" });

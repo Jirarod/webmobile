@@ -3,6 +3,14 @@ import pool from "./Database";
 export default async function itemincart(req, res) {
     if (req.method === "POST") {
         const { userID } = req.body;
+
+        //ปรับ
+        const sql = "UPDATE cart SET C_status = ? WHERE C_Uid = ? AND C_status = ? ";
+        const [changestatus] = await pool.query(sql, ["อยู่ในตระกร้า", userID, "รอการชำระเงิน"]);
+        console.log(changestatus);
+
+
+
         const insertQuery = `
   SELECT * FROM cart
   INNER JOIN product ON cart.C_PDid = product.PDid

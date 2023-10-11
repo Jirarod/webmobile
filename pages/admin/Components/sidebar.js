@@ -49,6 +49,11 @@ function sidebar() {
         layoutside.classList.toggle("layoutside__mini");
 
     }
+    const logout = (e) => {
+        e.preventDefault();
+        localStorage.removeItem('admintoken');
+        window.location.href = "/admin/login";
+    }
 
 
   return (
@@ -64,7 +69,7 @@ function sidebar() {
                
             <div className={styles.sidebar__title1} hidden={show}>รายงาน</div>
                     <div className={styles.sidebar__listItem}>
-                        <a href="#" className={styles.sidebar__link}>
+                        <a href="/admin/dashboard" className={styles.sidebar__link}>
                             <FontAwesomeIcon icon={faChartLine} className={styles.sidebar__iconitem}/>
                             <span hidden={show} >รายงานข้อมูล</span>
                         </a>
@@ -98,7 +103,7 @@ function sidebar() {
                     <div className={styles.sidebar__title} hidden={show}>การแจ้งเตือนต่างๆ</div>
                     
                     <div className={styles.sidebar__listItem}>
-                        <a href="#" className={styles.sidebar__link}>
+                        <a href="/admin/notice" className={styles.sidebar__link}>
                             <FontAwesomeIcon icon={faBell} className={styles.sidebar__iconitem}/>
                             <span hidden={show} >รายการกาแจ้งเตือน</span>
                         </a>
@@ -106,7 +111,7 @@ function sidebar() {
                 </div>
 
                 <div className={styles.sidebar__footer}>
-                   <Button variant="danger" className={styles.sidebar__btnlogout}>Logout</Button>
+                   <Button variant="danger" onClick={logout} className={styles.sidebar__btnlogout}>Logout</Button>
                </div>
          </div>
 

@@ -13,7 +13,7 @@ function cart() {
 
   const [data,setData] = useState([]);
 
-
+ const [active,setActive] = useState(true);
 
 
   useEffect(() => {
@@ -55,9 +55,11 @@ function cart() {
         const price = parseInt(cart.PDprice);
     
         if (isChecked) {
+          setActive(false);
           setSelectedProducts((prevSelectedProducts) => [...prevSelectedProducts, cart]);
           setSum((prevSum) => prevSum + price);
         } else {
+          setActive(true);
           setSelectedProducts((prevSelectedProducts) => prevSelectedProducts.filter((item) => item !== cart));
           setSum((prevSum) => prevSum - price);
         }
@@ -74,6 +76,7 @@ function cart() {
     
       if (isChecked) {
         setIsFirstCheckboxChecked(true);
+        setActive(false);
     
         const allProducts = data.map((item) => item.product);
         setSelectedProducts(allProducts);
@@ -81,6 +84,7 @@ function cart() {
         const totalPrice = allProducts.reduce((total, product) => total + parseInt(product.PDprice), 0);
         setSum(totalPrice);
       } else {
+        setActive(true);
         setIsFirstCheckboxChecked(false);
     
         setSelectedProducts([]);
@@ -111,12 +115,10 @@ function cart() {
       try
       {
         const res = await axios.post("/api/confirmorder",{selectedProducts : selectedProducts});
-     
         if(await res.data.message === "order confirm")
         {
           window.location.href = '/checkout';
         }
-        
       }
       catch(err)
       {
@@ -210,7 +212,7 @@ function cart() {
               </Col>
               
               <Col sm={2} className={styles.Colmiddlefooter}>
-              <Button variant="success" onClick={handleSubmit} >ยืนยันการซื้อ</Button>
+              <Button variant="success" disabled={active} onClick={handleSubmit} >ยืนยันการซื้อ</Button>
               </Col>
               </Row>
 

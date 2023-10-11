@@ -6,10 +6,15 @@ import Usernav from "./addon/Usernav";
 import axios from "axios";
 import styles from "@/styles/Market.module.css";
 import { decode } from "jsonwebtoken";
-
+import Link from "next/link";
 
 function Marketpage() {
   const [product, setProduct] = useState([]);
+  const [product1, setProduct1] = useState([]);  //มือ1
+  const [product2, setProduct2] = useState([]);  //มือ2
+  const [ipad, setIpad] = useState([]);  //มือไอแพด
+  const [gadjet, setGadjet] = useState([]);  //มือกาจเจ็ต
+  const [other, setOther] = useState([]);  //อื่นๆ
   const [id, setId] = useState();
 
 
@@ -35,6 +40,19 @@ function Marketpage() {
     try{
     const res = await axios.get("/api/allproduct");
     setProduct(res.data.combinedData);
+    const res2hand = await axios.get("/api/2handproduct");
+    setProduct2(res2hand.data.combinedData);
+    const res1hand = await axios.get("/api/1handproduct");
+    setProduct1(res1hand.data.combinedData);
+    const resipad = await axios.get("/api/Ipadtabproduct");
+    setIpad(resipad.data.combinedData);
+    const resgadjet = await axios.get("/api/gadjetproduct");
+    setGadjet(resgadjet.data.combinedData);
+    const resother = await axios.get("/api/Anotherproduct");
+    setOther(resother.data.combinedData);
+
+
+
     setLoading(false);
     console.log(res.data)
     }catch(err){
@@ -45,6 +63,11 @@ function Marketpage() {
 
   const addincart = async (PDid) => {
     try {
+      if (!id) {
+        alert("กรุณาเข้าสู่ระบบ");
+        return;
+      }
+      else{
       const res = await axios.post("/api/addincart", { 
         productID: PDid
         , userID : id
@@ -54,6 +77,7 @@ function Marketpage() {
       if (res.data.message === "Product added") {
         window.location.href = "/user/account/cart";
       }
+    }
 
     } catch (err) {
       console.log(err);
@@ -121,6 +145,7 @@ function Marketpage() {
             <Row>
               {product.map((item) => (
               <Col key={item} sm={3} className={styles.Colmiddle}>
+                <Link className="text-decoration-none" href={`/product/${item.product.PDid}`}>
                 <Card className={styles.Card} >
                   <div className={styles.Cardimgover}>
                   <Card.Img className={styles.Cardimg} variant="top" src={item.IMGurl.IMGurl} />
@@ -130,9 +155,6 @@ function Marketpage() {
                     <Card.Text className={styles.textdetail}>
                       {item.product.PDdetails}
                     </Card.Text>
-
-                   <Button variant="primary" onClick={()=> addincart(item.product.PDid)}>เพิ่มลงตะกร้า</Button>
-
                   </Card.Body>
                   <Card.Footer className={styles.Cardfooter}>
                     <Row>
@@ -147,20 +169,200 @@ function Marketpage() {
                
                 </Card.Footer>
                 </Card>
+                </Link>
               </Col>
               ))}
+              </Row>
+          </div>
 
-           
+          <div className="p-5 text-center t rounded-3 shadow-5 ">
+            <h2 className="mb-4 text-dark">สินค้ามือสอง</h2>
+            <Row>
+              {product2.map((item) => (
+              <Col key={item} sm={3} className={styles.Colmiddle}>
+                <Link className="text-decoration-none" href={`/product/${item.product.PDid}`}>
+                <Card className={styles.Card} >
+                  <div className={styles.Cardimgover}>
+                  <Card.Img className={styles.Cardimg} variant="top" src={item.IMGurl.IMGurl} />
+                  </div>
+                  <Card.Body className={styles.Cardbody}>
+                    <Card.Title>{item.product.PDname}</Card.Title>
+                    <Card.Text className={styles.textdetail}>
+                      {item.product.PDdetails}
+                    </Card.Text>
+                  </Card.Body>
+                  <Card.Footer className={styles.Cardfooter}>
+                    <Row>
+                  <Col sm={6}>
+                  <Card.Text className="text-start" >{item.product.PDcategory}</Card.Text>
+                  </Col>
 
-          
-
-
+                    <Col sm={6}>
+                  <Card.Text className="text-end" >{parseInt(item.product.PDprice).toLocaleString()} บาท</Card.Text>
+                  </Col>
+                  </Row>
+               
+                </Card.Footer>
+                </Card>
+                </Link>
+              </Col>
+              ))}
               </Row>
 
              
             
 
           </div>
+
+          <div className="p-5 text-center t rounded-3 shadow-5 ">
+            <h2 className="mb-4 text-dark">สินค้ามือหนึ่ง</h2>
+            <Row>
+            {product1.length === 0 ? <div>ไม่มีสินค้า</div> : null}
+              {product1.map((item) => (
+              <Col key={item} sm={3} className={styles.Colmiddle}>
+                <Link className="text-decoration-none" href={`/product/${item.product.PDid}`}>
+                <Card className={styles.Card} >
+                  <div className={styles.Cardimgover}>
+                  <Card.Img className={styles.Cardimg} variant="top" src={item.IMGurl.IMGurl} />
+                  </div>
+                  <Card.Body className={styles.Cardbody}>
+                    <Card.Title>{item.product.PDname}</Card.Title>
+                    <Card.Text className={styles.textdetail}>
+                      {item.product.PDdetails}
+                    </Card.Text>
+                  </Card.Body>
+                  <Card.Footer className={styles.Cardfooter}>
+                    <Row>
+                  <Col sm={6}>
+                  <Card.Text className="text-start" >{item.product.PDcategory}</Card.Text>
+                  </Col>
+
+                    <Col sm={6}>
+                  <Card.Text className="text-end" >{parseInt(item.product.PDprice).toLocaleString()} บาท</Card.Text>
+                  </Col>
+                  </Row>
+               
+                </Card.Footer>
+                </Card>
+                </Link>
+              </Col>
+              ))}
+              </Row>
+
+            </div>
+
+            <div className="p-5 text-center t rounded-3 shadow-5 ">
+            <h2 className="mb-4 text-dark">ไอแพ็ดและแท็บเล็ต</h2>
+            <Row>
+            {ipad.length === 0 ? <div>ไม่มีสินค้า</div> : null}
+              {ipad.map((item) => (
+              <Col key={item} sm={3} className={styles.Colmiddle}>
+                <Link className="text-decoration-none" href={`/product/${item.product.PDid}`}>
+                <Card className={styles.Card} >
+                  <div className={styles.Cardimgover}>
+                  <Card.Img className={styles.Cardimg} variant="top" src={item.IMGurl.IMGurl} />
+                  </div>
+                  <Card.Body className={styles.Cardbody}>
+                    <Card.Title>{item.product.PDname}</Card.Title>
+                    <Card.Text className={styles.textdetail}>
+                      {item.product.PDdetails}
+                    </Card.Text>
+                  </Card.Body>
+                  <Card.Footer className={styles.Cardfooter}>
+                    <Row>
+                  <Col sm={6}>
+                  <Card.Text className="text-start" >{item.product.PDcategory}</Card.Text>
+                  </Col>
+
+                    <Col sm={6}>
+                  <Card.Text className="text-end" >{parseInt(item.product.PDprice).toLocaleString()} บาท</Card.Text>
+                  </Col>
+                  </Row>
+               
+                </Card.Footer>
+                </Card>
+                </Link>
+              </Col>
+              ))}
+              </Row>
+
+            </div>
+
+            <div className="p-5 text-center t rounded-3 shadow-5 ">
+            <h2 className="mb-4 text-dark">อุปกรณ์เสริม</h2>
+            <Row>
+              {gadjet.length === 0 ? <div>ไม่มีสินค้า</div> : null}
+              {gadjet.map((item) => (
+              <Col key={item} sm={3} className={styles.Colmiddle}>
+                <Link className="text-decoration-none" href={`/product/${item.product.PDid}`}>
+                <Card className={styles.Card} >
+                  <div className={styles.Cardimgover}>
+                  <Card.Img className={styles.Cardimg} variant="top" src={item.IMGurl.IMGurl} />
+                  </div>
+                  <Card.Body className={styles.Cardbody}>
+                    <Card.Title>{item.product.PDname}</Card.Title>
+                    <Card.Text className={styles.textdetail}>
+                      {item.product.PDdetails}
+                    </Card.Text>
+                  </Card.Body>
+                  <Card.Footer className={styles.Cardfooter}>
+                    <Row>
+                  <Col sm={6}>
+                  <Card.Text className="text-start" >{item.product.PDcategory}</Card.Text>
+                  </Col>
+
+                    <Col sm={6}>
+                  <Card.Text className="text-end" >{parseInt(item.product.PDprice).toLocaleString()} บาท</Card.Text>
+                  </Col>
+                  </Row>
+               
+                </Card.Footer>
+                </Card>
+                </Link>
+              </Col>
+              ))}
+              </Row>
+
+            </div>
+
+            <div className="p-5 text-center t rounded-3 shadow-5 ">
+            <h2 className="mb-4 text-dark">อื่นๆ</h2>
+            <Row>
+            {other.length === 0 ? <div>ไม่มีสินค้า</div> : null}
+              {other.map((item) => (
+              <Col key={item} sm={3} className={styles.Colmiddle}>
+                <Link className="text-decoration-none" href={`/product/${item.product.PDid}`}>
+                <Card className={styles.Card} >
+                  <div className={styles.Cardimgover}>
+                  <Card.Img className={styles.Cardimg} variant="top" src={item.IMGurl.IMGurl} />
+                  </div>
+                  <Card.Body className={styles.Cardbody}>
+                    <Card.Title>{item.product.PDname}</Card.Title>
+                    <Card.Text className={styles.textdetail}>
+                      {item.product.PDdetails}
+                    </Card.Text>
+                  </Card.Body>
+                  <Card.Footer className={styles.Cardfooter}>
+                    <Row>
+                  <Col sm={6}>
+                  <Card.Text className="text-start" >{item.product.PDcategory}</Card.Text>
+                  </Col>
+
+                    <Col sm={6}>
+                  <Card.Text className="text-end" >{parseInt(item.product.PDprice).toLocaleString()} บาท</Card.Text>
+                  </Col>
+                  </Row>
+               
+                </Card.Footer>
+                </Card>
+                </Link>
+              </Col>
+              ))}
+              </Row>
+
+            </div>
+
+
         </Container>
     
     </div>

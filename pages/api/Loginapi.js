@@ -2,13 +2,16 @@
 import pool from './Database'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
+import { redirect } from 'next/dist/server/api-utils';
 
 export default async function Loginapi(req, res) {
     if(req.method ==="POST")
     {
+
+
        const {email, password} = req.body;
-         const [rows,field] = await pool.query('SELECT * FROM users WHERE Uemail = ?', [email])
-            if(rows.length> 0)
+         const [rows,field] = await pool.query('SELECT * FROM users WHERE Uemail = ?', [email])  
+         if(rows.length> 0)
             {
                 const compare = await bcrypt.compare(password, rows[0].Upassword)
                 console.log(compare); console.log(rows);
@@ -31,6 +34,7 @@ export default async function Loginapi(req, res) {
                 console.log("user not found");
                 res.send({message: 'user not found'})
             }
+    
 
             
         

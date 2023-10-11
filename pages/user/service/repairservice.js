@@ -232,7 +232,7 @@ function repairservice() {
               </h5>
               {/* <hr className={styles.hr}/> */}
               <div className={styles.lottiecontainer}>
-                <Lottie animationData={animationData} />
+                <Lottie animationData={animationData} className={styles.emoteicon}/>
               </div>
               <Form.Group className="mt-3">
                 <Form.Label>ยี่ห้อ</Form.Label>

@@ -169,7 +169,7 @@ function sellservice() {
                   <>
                     <div className={styles.speechBubbleContainer}>
                       <div className={styles.speechBubble}>
-                        <h4>The customer sends the product to the store</h4>
+                        <h5>The customer sends the product to the store</h5>
                         <p>(ลูกค้าส่งสินค้าให้ทางร้าน)</p>
                       </div>
                     </div>
@@ -202,7 +202,7 @@ function sellservice() {
               <h5 className={styles.title1}>บริการรับซื้อ</h5>
               {/* <hr className={styles.hr} /> */}
               <div className={styles.lottiecontainer}>
-                <Lottie animationData={animationData} />
+                <Lottie animationData={animationData} className={styles.emoteicon} />
               </div>
               <Form.Group className="mb-3" as={Row}>
                 <Col sm={6}>

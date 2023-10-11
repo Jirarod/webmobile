@@ -194,15 +194,17 @@
   }
 
 .lottiecontainer {
-    height: 10px;
-    width: 150px;
+    
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 155px;
-    margin-top: 1px;
-    margin-bottom: 20px;
+ 
 
+  }
+  .emoteicon{
+    width: 900px;
+    height: 90px;
   }
 
 

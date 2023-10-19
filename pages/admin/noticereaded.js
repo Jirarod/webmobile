@@ -4,8 +4,7 @@ import { Card, Container,Col,Row, Button,Nav } from 'react-bootstrap'
 import styles from "@/styles/notice.module.css";
 import axios, { all } from 'axios';
 import dayjs from 'dayjs';
-import e from 'cors';
-function notice() {
+function noticereaded() {
   
   useEffect(() => {
     getnotice()
@@ -14,7 +13,7 @@ function notice() {
   const [allnotice, setallnotice] = useState([]);
 
   const getnotice = async () => {
-    const res = await axios.get("/api/admin/noticeall")
+    const res = await axios.get("/api/admin/noticeread")
     console.log(res.data.combinedData      )
 
     setallnotice(res.data.combinedData)
@@ -22,30 +21,41 @@ function notice() {
   }
   const [data, setData] = useState([]);
   
-  const read = async (item) => {
-    console.log(item)
-
-    const res = await axios.post("/api/admin/noticeall", { Nid : item.Nid })
-
-    if(item.Ntype === "รายการซ่อม")
-    {
-      window.location.href = `/admin/Repair/Rlist`
-    }
-    else if(item.Ntype === "รายการรับซื้อ")
-    {
-      window.location.href = `/admin/Purchase/Plist`
-    }
-    else if(item.Ntype === "รายการสั่งซื้อ")
-    {
-      window.location.href = `/admin/Sale/reqproduct`
-    }
-    else
-    {
-     window.location.href = `/admin/noticereject`
-    }
+//   const read = async (item) => {
+//     console.log(item)
+//     if(item.Ntype === "รายการซ่อม")
+//     {
+//       window.location.href = `/admin/Repair/Rlist`
+//     }
+//     else if(item.Ntype === "รายการรับซื้อ")
+//     {
+//       window.location.href = `/admin/Purchase/Plist`
+//     }
+//     else if(item.Ntype === "รายการสั่งซื้อ")
+//     {
+//       window.location.href = `/admin/Sale/reqproduct`
+//     }
+//     else
+//     {
+//      window.location.href = `/admin/noticereject`
+//     }
 
 
-  }
+//   }
+
+    const del = async (Nid) => {  
+    console.log(Nid)
+    try {
+      const res = await axios.post("/api/admin/delnotice", { Nid : Nid })
+      console.log(res.data)
+      window.location.reload();
+    }
+    catch (err) {
+        console.log(err.response.data.msg)
+    }
+   
+    }
+
 
 
 
@@ -57,7 +67,7 @@ function notice() {
       <Nav
         variant="tabs"
         className="justify-content-center my-3"
-        defaultActiveKey="/admin/notice">
+        defaultActiveKey="/admin/noticereaded">
         <Nav.Item>
           <Nav.Link href="/admin/notice">การแจ้งเตือนที่ยังไม่ได้อ่าน</Nav.Link>
           
@@ -76,7 +86,7 @@ function notice() {
 
       <Container fluid className={styles.Con} >
         {allnotice.map((item) => (<>
-        <Card className={` ${styles.card}`} onClick={()=>read(item.rows)}>
+        <Card className={` ${styles.card}`} >
           <Card.Body>
             <Row>
             <Col sm="2">
@@ -110,7 +120,7 @@ function notice() {
               </Card.Text>
             </Col>
             <Col sm="2" className='d-flex justify-content-center align-content-center'>
-             
+             <button variant="primary" onClick={()=>del(item.rows.Nid)} className={styles.btnclose}>X</button>
             </Col>
             </Row>
           </Card.Body>
@@ -131,4 +141,4 @@ function notice() {
       </Layoutadmin>
   )
 }
-export default notice
+export default noticereaded

@@ -33,7 +33,7 @@ function allproduct() {
       const fetchData = async () => {
         try {
           const response = await axios.get("/api/admin/producttable");
-        setTableData(response.data);
+          setTableData(response.data);
 
         console.log(response.data);
         } catch (error) {

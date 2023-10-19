@@ -71,7 +71,10 @@ function listrepair() {
         return;
       } else {
         const res = await axios.post("/api/trackrepair", {
+          Uid: id,
           RSid: data.RSid,
+          brand: data.RSbrand,
+          model: data.RSmodel,
           status: "อยู่ระหว่างการส่งซ่อม",
           trackid: tracking,
         });

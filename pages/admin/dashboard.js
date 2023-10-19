@@ -52,8 +52,21 @@ function dashboard() {
   const getnuberrpair = async () => {
     const res = await axios.get("/api/admin/Dashrepairofmonth")
     console.log(res.data)
-    setnuberrepair(res.data.rows[0].NumberOfRepair);
-    setsumrepair(res.data.SUM[0].TotalAppraise);
+    if(res.data.rows[0].NumberOfRepair === null)
+    {
+      setnuberrepair(0)
+    }
+    else
+    {
+      setnuberrepair(res.data.rows[0].NumberOfRepair);
+    }
+
+    if(res.data.SUM[0].TotalAppraise === null)
+    {
+      setsumrepair(0)
+    }
+    else
+     {setsumrepair(res.data.SUM[0].TotalAppraise);}
   }
   
   const [lastsell, setlastsell] = useState([]);

@@ -3,10 +3,13 @@ import styles from "@/styles/sidebar.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars,faChartLine,faScrewdriverWrench,faMobileScreenButton,faStore,faBell } from "@fortawesome/free-solid-svg-icons";
 import { Button, Nav, Navbar, Container } from "react-bootstrap";
+import axios from "axios";
 
 
 function sidebar() {
     const [show, setShow] = useState(false);
+
+    
 
 
     const handlemini = (e) => {
@@ -105,7 +108,7 @@ function sidebar() {
                     <div className={styles.sidebar__listItem}>
                         <a href="/admin/notice" className={styles.sidebar__link}>
                             <FontAwesomeIcon icon={faBell} className={styles.sidebar__iconitem}/>
-                            <span hidden={show} >รายการกาแจ้งเตือน</span>
+                            <span hidden={show} className={styles.boxnotice}>รายการกาแจ้งเตือน </span>
                         </a>
                     </div>
                 </div>

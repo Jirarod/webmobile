@@ -67,7 +67,7 @@ function sellserviceupload() {
               }
                 )
         }
-        if (images.length > 5) {
+        if (images.length >= 5) {
             Swal.fire({
                 icon: 'error',
                 title: 'กรุณาเลือกรูปภาพ',

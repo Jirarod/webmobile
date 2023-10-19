@@ -1,0 +1,58 @@
+.imgprofile
+{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 0 auto;
+    display: block;
+}
+
+.btnclose
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    z-index: 50;
+   background-color: red;
+  border: red 1px solid;
+    color: #fff;
+    border-radius: 5px;
+    padding: 5px 10px;
+
+}
+.btnclose:hover
+{
+    background-color: #fff;
+    color: red;
+    border: red 1px solid;
+}
+.contrack
+{
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #fffefe;
+    margin-top: 10px;
+}
+.card
+{
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #fffefe;
+    margin-top: 10px;
+}
+.card:hover
+{
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    
+}
+.Con
+{
+    overflow: auto;
+    height: 80vh;
+    width: 100%;
+}

@@ -100,7 +100,11 @@ function listsell() {
   const reject = async (status) => {
     try {
       const res = await axios.post("/api/rejectsellservice", {
+        Uid: data.SS_Uid,
         id: data.SSid,
+        brand: data.SSbrand,
+        model: data.SSmodel,
+
         status: status,
       });
 
@@ -183,6 +187,7 @@ function listsell() {
   const updatestatus = async (data, status) => {
     try {
       const res = await axios.post("/api/acceptsellservice", {
+        Uid: data.SS_Uid,
         id: data.SSid,
         status: status,
       });
@@ -241,6 +246,7 @@ function listsell() {
         setLoading(false);
 
         const res = await axios.post("/api/acceptsellservice", {
+          Uid: data.SS_Uid,
           id: data.SSid,
           status: "อยู่ระหว่างการส่งขาย",
           imgtrack: response.url,

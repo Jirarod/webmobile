@@ -424,7 +424,7 @@ function Rlist() {
                     </Col>
                   </Form.Group>
 
-                  <Form.Group as={Row} className="mt-2">
+                  {/* <Form.Group as={Row} className="mt-2">
                     <Form.Label column sm="5" className="text-start fw-bold">
                       ที่อยู่ส่งซ่อม:
                     </Form.Label>
@@ -435,7 +435,7 @@ function Rlist() {
                         as="textarea" rows={3}
                       ></Form.Control>
                     </Col>
-                  </Form.Group>
+                  </Form.Group> */}
 
                 </Form>
               </Col>

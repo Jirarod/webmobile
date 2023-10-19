@@ -5,7 +5,7 @@ export default async function handler(req, res) {
         const { SSid } = req.body;
         try {
             const [rows, field] = await pool.query(
-                `    SELECT sellservice.*, users.Uname, users.Uimage, users.Uemail, users.Uphone, address.*
+                ` SELECT sellservice.*, users.Uname, users.Uimage, users.Uemail, users.Uphone, address.*
                 FROM sellservice
                 INNER JOIN users ON sellservice.SS_Uid = users.Uid
                 LEFT JOIN address ON sellservice.SS_Uid = address.ADD_Uid

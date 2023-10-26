@@ -4,6 +4,7 @@ export default async function handler(req, res) {
     if (req.method === "POST") {
         const { Uid,status,RSid,trackid,slipedimg,brand,
             model } = req.body;
+            console.log(Uid);
        
          
         if(status ==="อยู่ระหว่างการส่งซ่อม")

@@ -27,7 +27,6 @@ export default async function updatestatus (req, res){
               pass: 'pbachedsbluektlc', // รหัสผ่าน Gmail ของคุณ
             },
           });
-    
           const mailOption = {
             from: 'jjaroendecharat@gmail.com', // อีเมล Gmail ของคุณที่จะใช้ส่งอีเมล
             to: email, // อีเมลที่ต้องการส่งไป
@@ -345,7 +344,7 @@ export default async function updatestatus (req, res){
                               <div class="text">
                                 <h2>NOTICE REPAIR</h2>
                                         <h5>คุณ ${name}</h5>
-                                        <h5>รายการ ${RS_brand}${RS_model} ขอการซ่อม</h5>
+                                        <h5>รายการ ${brand}${model} ขอการซ่อม</h5>
                               </div>
                             </td>
                           </tr>
@@ -355,7 +354,7 @@ export default async function updatestatus (req, res){
                               <img src="${image}" alt="" style="width: 100px; max-width: 600px; height: auto; margin: auto; display: block;">
                                 <h3 class="name">รายละเอียดการแจ้งเตือนการซ่อม</h3>
                                 <span class="position">สถานะการซ่อมของคุณ</span>
-                                <h4 class="position">${RS_status}</h4>
+                                <h4 class="position">${RSstatus}</h4>
                                          
                                  <p><a href="http://localhost:3000/user/account/listrepair" class="btn btn-primary">Your Repair list</a></p>
                                
@@ -412,10 +411,11 @@ export default async function updatestatus (req, res){
             </html>`,
             };
     
-         res.status(200).json({ message: "success send" ,rows });  
+         
          try {
             await transporter.sendMail(mailOption);
             console.log('Email sent successfully!');
+            res.status(200).json({ message: "success send" ,rows });  
           } catch (error) {
             console.error('Error sending email:', error);
           }  
@@ -753,7 +753,7 @@ export default async function updatestatus (req, res){
                                   <div class="text">
                                     <h2>NOTICE REPAIR</h2>
                                             <h5>คุณ ${name}</h5>
-                                            <h5>รายการ ${RS_brand}${RS_model} ขอการซ่อม</h5>
+                                            <h5>รายการ ${brand}${model} ขอการซ่อม</h5>
                                   </div>
                                 </td>
                               </tr>
@@ -763,7 +763,7 @@ export default async function updatestatus (req, res){
                                   <img src="${image}" alt="" style="width: 100px; max-width: 600px; height: auto; margin: auto; display: block;">
                                     <h3 class="name">รายละเอียดการแจ้งเตือนการซ่อม</h3>
                                     <span class="position">สถานะการซ่อมของคุณ</span>
-                                    <h4 class="position">${RS_status}</h4>
+                                    <h4 class="position">${RSstatus}</h4>
                                              
                                      <p><a href="http://localhost:3000/user/account/listrepair" class="btn btn-primary">Your Repair list</a></p>
                                    
@@ -820,10 +820,11 @@ export default async function updatestatus (req, res){
                 </html>`,
                 };
         
-             res.status(200).json({ message: "success send" ,rows });  
+             
              try {
                 await transporter.sendMail(mailOption);
                 console.log('Email sent successfully!');
+                res.status(200).json({ message: "success send" ,rows });  
               } catch (error) {
                 console.error('Error sending email:', error);
               }  
@@ -1158,7 +1159,7 @@ export default async function updatestatus (req, res){
                                           <div class="text">
                                             <h2>NOTICE REPAIR</h2>
                                                     <h5>คุณ ${name}</h5>
-                                                    <h5>รายการ ${RS_brand}${RS_model} ขอการซ่อม</h5>
+                                                    <h5>รายการ ${brand}${model} ขอการซ่อม</h5>
                                           </div>
                                         </td>
                                       </tr>
@@ -1168,7 +1169,7 @@ export default async function updatestatus (req, res){
                                           <img src="${image}" alt="" style="width: 100px; max-width: 600px; height: auto; margin: auto; display: block;">
                                             <h3 class="name">รายละเอียดการแจ้งเตือนการซ่อม</h3>
                                             <span class="position">สถานะการซ่อมของคุณ</span>
-                                            <h4 class="position">${RS_status}</h4>
+                                            <h4 class="position">${RSstatus}</h4>
                                                      
                                              <p><a href="http://localhost:3000/user/account/listrepair" class="btn btn-primary">Your Repair list</a></p>
                                            
@@ -1225,10 +1226,11 @@ export default async function updatestatus (req, res){
                         </html>`,
                         };
                 
-                     res.status(200).json({ message: "success send" ,rows });  
+                     
                      try {
                         await transporter.sendMail(mailOption);
                         console.log('Email sent successfully!');
+                        res.status(200).json({ message: "success send" ,rows });  
                       } catch (error) {
                         console.error('Error sending email:', error);
                       }  

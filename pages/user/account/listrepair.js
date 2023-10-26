@@ -70,6 +70,9 @@ function listrepair() {
         alert("กรุณาใส่tracking number");
         return;
       } else {
+        const token = localStorage.getItem("token");
+        const decoded = decode(token);
+        const id = decoded.id;
         const res = await axios.post("/api/trackrepair", {
           Uid: id,
           RSid: data.RSid,

@@ -142,7 +142,11 @@ function listrepair() {
         "https://api.cloudinary.com/v1_1/dsacsgwkl/image/upload",
         formData
       );
+      const token = localStorage.getItem("token");
+        const decoded = decode(token);
+        const id = decoded.id;
       const res = await axios.post("/api/trackrepair", {
+        Uid: id,
         RSid: data.RSid,
         status: "รอการตรวจสอบ",
         slipedimg: response.data.secure_url,

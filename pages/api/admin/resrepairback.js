@@ -408,10 +408,11 @@ export default async function resrepairback (req, res){
             </html>`,
             };
 
-         res.status(200).json({ message: "success send" ,rows });  
+      
          try {
             await transporter.sendMail(mailOption);
-            console.log('Email sent successfully!');
+            console.log('Email sent successfully!'); 
+              res.status(200).json({ message: "success send" ,rows });  
           } catch (error) {
             console.error('Error sending email:', error);
           }  

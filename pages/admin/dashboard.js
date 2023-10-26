@@ -126,18 +126,7 @@ function dashboard() {
 
         </Col>
 
-        <Col className='d-flex justify-content-center'>
-        <Card className={styles.card}>
-        <Card.Body>
-        <Card.Title>รายการรับซื้อ</Card.Title>
-        <Card.Text>
-          รายการสั่งซื้อทั้งหมด
-        </Card.Text>
-        </Card.Body>
-        </Card>
-
-        </Col>
-
+        
       </Row>
        <hr/>
       <Row className={styles.Rowcontrol}>

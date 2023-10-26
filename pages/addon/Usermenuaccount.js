@@ -71,9 +71,7 @@ function Usermenuaccount() {
 
 
 
-          <FontAwesomeIcon icon={faBell} className="mx-2" /> การแจ้งเตือน
-          <li className={styles.Uinli}> แจ้งเตือนการซ่อม</li>
-          <li className={styles.Uinli}> แจ้งเตือนการขาย</li>
+         
     
          
 

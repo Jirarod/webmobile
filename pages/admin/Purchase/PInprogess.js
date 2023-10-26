@@ -56,7 +56,11 @@ function PInprogess() {
   const [url, setUrl] = useState([]);
   const [data, setData] = useState([]);
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
+  const handleClose = () => { 
+    setShow(false); 
+    window.location.reload();
+  
+  }
   const handleShow = (row) => {
     setData(row);
     setShow(true);
@@ -244,7 +248,7 @@ function PInprogess() {
             url: url,
           });
 
-          window.location.href = "/admin/Purchase/Psucces";
+          window.location.href = "/admin/Purchase/Psuccess";
           fetchData();
 
 

@@ -1,4 +1,5 @@
 import pool from "../Database";
+import nodeMailer from "nodemailer";
 
 export default async function updatesale(req, res) {
     if (req.method === "POST") {
@@ -12,6 +13,9 @@ export default async function updatesale(req, res) {
        const insertQuery = "UPDATE payment SET PAY_admin_track = ? , PAY_status = ? ,PAY_admin_times = ? WHERE PAYid = ?";
         const [rows] = await pool.query(insertQuery, [image,status,new Date(),PAYid]);
         }
+        
+
+
        res.status(200).json({ message: "update success" });
     
 

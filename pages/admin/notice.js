@@ -67,9 +67,6 @@ function notice() {
           <Nav.Link href="/admin/noticereaded">การแจ้งเตือนที่อ่านแล้ว</Nav.Link>
         </Nav.Item>
 
-        <Nav.Item>
-          <Nav.Link href="/admin/noticereject">การแจ้งเตือนรายการที่ยกเลิก</Nav.Link>
-        </Nav.Item>
       </Nav>
 
 

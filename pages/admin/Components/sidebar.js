@@ -108,7 +108,7 @@ function sidebar() {
                     <div className={styles.sidebar__listItem}>
                         <a href="/admin/notice" className={styles.sidebar__link}>
                             <FontAwesomeIcon icon={faBell} className={styles.sidebar__iconitem}/>
-                            <span hidden={show} className={styles.boxnotice}>รายการกาแจ้งเตือน </span>
+                            <span hidden={show} className={styles.boxnotice}>รายการการแจ้งเตือน </span>
                         </a>
                     </div>
                 </div>

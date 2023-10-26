@@ -1,4 +1,5 @@
 import pool from "../Database";
+import nodemailer from "nodemailer";
 
 export default async function handle (req, res){
     if(req.method === "POST")

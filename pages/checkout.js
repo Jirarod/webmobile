@@ -250,7 +250,7 @@ function checkout() {
                 อัพโหลดรูปการชำระเงิน
                 </Form.Label>
                <Col sm={6} className="d-flex align-items-center justify-content-center">
-                 <img src="https://res.cloudinary.com/dsacsgwkl/image/upload/v1694674902/Aboutsellservice/f2ehzv8g27wu6iiliaik.jpg"
+                 <img src="https://res.cloudinary.com/dsacsgwkl/image/upload/v1698353573/Slipeduser/cyewhrarhrwvgjxeajsi.jpg"
                     className={styles.imgpay}
                  />
                </Col>

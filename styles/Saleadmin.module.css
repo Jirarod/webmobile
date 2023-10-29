@@ -151,8 +151,9 @@
 .containertable{
   padding: 10px;
   margin-top: 40px;
-  max-height: 70vh; 
+  max-height: 80vh; 
   border-radius: 10px;
+  overflow: auto;
 }
 
 .Formrow

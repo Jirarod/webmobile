@@ -186,13 +186,13 @@
 
 .form{
     position: relative;
-    margin-top: 80px;
+    margin-top: 50px;
     display: flex;
     margin-left: 30%;
     flex-direction: column;
     padding: 20px;
     width: 50vh;
-    height: 70vh;
+    height: 80vh;
     background-color: #ffffff;
     border-radius: 5px;
     box-shadow: 1px 1px 3px 0px #b1b1b1;

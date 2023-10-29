@@ -143,12 +143,12 @@ function addproduct() {
         defaultActiveKey="/admin/Sale/addproduct"
       >
         <Nav.Item>
-          <Nav.Link href="/admin/Sale/addproduct">เพิ่มรายการสิ้นค้า</Nav.Link>
+          <Nav.Link href="/admin/Sale/addproduct">เพิ่มรายการสินค้า</Nav.Link>
           
         </Nav.Item>
 
         <Nav.Item>
-          <Nav.Link href="/admin/Sale/allproduct">รายการสิ้นค้าทั้งหมด</Nav.Link>
+          <Nav.Link href="/admin/Sale/allproduct">รายการสินค้าทั้งหมด</Nav.Link>
         </Nav.Item>
 
         <Nav.Item>
@@ -301,7 +301,7 @@ function addproduct() {
                 </Row>
                 
                   {loading ? (<><Row><div className={styles.loader}><p className={styles.textload}>กำลังเพิ่มสินค้า</p></div></Row></>):(<Row className="justify-content-end"><Button variant="success" className="mt-1 mx-3" style={{width:"40%"}} onClick={addproduct} disabled={isActive}>
-          เพิ่มรายการสิ้นค้า<FontAwesomeIcon icon={faCartPlus} className="" />
+          เพิ่มรายการสินค้า<FontAwesomeIcon icon={faCartPlus} className="" />
         </Button></Row>)}
               
       

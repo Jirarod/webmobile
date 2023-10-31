@@ -134,12 +134,12 @@ function allproduct() {
         className="justify-content-center"
         defaultActiveKey="/admin/Sale/allproduct">
         <Nav.Item>
-          <Nav.Link href="/admin/Sale/addproduct">เพิ่มรายการสิ้นค้า</Nav.Link>
+          <Nav.Link href="/admin/Sale/addproduct">เพิ่มรายการสินค้า</Nav.Link>
           
         </Nav.Item>
 
         <Nav.Item>
-          <Nav.Link href="/admin/Sale/allproduct">รายการสิ้นค้าทั้งหมด</Nav.Link>
+          <Nav.Link href="/admin/Sale/allproduct">รายการสินค้าทั้งหมด</Nav.Link>
         </Nav.Item>
 
         <Nav.Item>

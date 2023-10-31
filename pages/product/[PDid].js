@@ -254,7 +254,8 @@ function PDid() {
     <header>
 
     <Container className={`ml-auto ${styles.Product}`}>
-   <Row>
+
+   <Row >
  
     <div style={{
             height: "800px",
@@ -265,7 +266,7 @@ function PDid() {
             marginRight: "100px",
           }}>  
     
-  <Row>
+  <Row >
       <Col sm={6} className='justify-content-center'>
       {/* Swiper ด้านบน */}
       <Swiper
@@ -382,6 +383,7 @@ function PDid() {
 
       </div>
       </Row>  
+      
     </Container>
     </header>
 

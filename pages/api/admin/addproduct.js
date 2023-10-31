@@ -8,8 +8,8 @@ export default async function handler(req, res) {
        // SELECT * FROM product WHERE id = LAST_INSERT_ID();
          
         const newProduct = await pool.query(
-            "INSERT INTO product (PDname, PDprice, PDdetails, PDcategory,PDdate,PDstock) VALUES (?, ?,?, ?, ?,?) ",
-            [name, price, detail, category,new Date()]
+            "INSERT INTO product (PDname, PDprice, PDdetails, PDcategory,PDdate,PDstock) VALUES (?,?,?, ?, ?,?) ",
+            [name, price, detail, category,new Date(),stock]
         );
         const [rows, field]= await pool.query(
             "SELECT * FROM product WHERE PDid = LAST_INSERT_ID()"

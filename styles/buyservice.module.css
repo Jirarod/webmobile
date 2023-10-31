@@ -73,11 +73,11 @@
 .buyForm
 {
     flex-direction: column;
-    margin-top: 15vh;
+    margin-top: 13vh;
     margin-left: 10vh;
     padding: 30px;
     width: 70vh;
-    height: 80vh;
+    height: 86vh;
     background: #ffffff;
     border-radius: 5px;
     box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.75);
@@ -118,7 +118,7 @@
 }
 
 .btn{
-    margin-top: 30px;
+    margin-top: 15px;
     height: 40px;
      border-radius: 5px;
     width: 100%;

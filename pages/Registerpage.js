@@ -19,13 +19,24 @@ function Registerpage() {
 
 
     const handleSendOTP = async () => {
+      const res = await axios.post("/api/checkuemail", {
+        email: email,
+      });
+      
+      if ((await res).data.message === "User already exists" || email === "") {
+        Swal.fire({
+          icon: "error",
+          title: "Email ถูกใช้งานแล้ว",
+          text: "User already exists!",
+          timer: 3000,
+        });
+      
+      } else {
       setActiveotp(true);
-  
       console.log(email);
       // สร้าง OTP ขึ้นมา (ให้เปลี่ยนส่วนนี้ตามที่คุณต้องการ)
       const generatedOtp = Math.floor(100000 + Math.random() * 900000);
       setOtp(generatedOtp.toString());
-  
       // ส่ง OTP ไปยังอีเมลของผู้ใช้
       const emailTo = email; // อีเมลของผู้ใช้ที่คุณต้องการส่ง OTP ไป
       const subject = "Your OTP Code";
@@ -45,6 +56,10 @@ function Registerpage() {
       } catch (error) {
         console.error("Error sending email:", error);
       }
+
+    }
+
+
     };
 
 
@@ -106,42 +121,42 @@ function Registerpage() {
 
 
 
-    const addusers = async (e) => {
-        e.preventDefault();
+    // const addusers = async (e) => {
+    //     e.preventDefault();
         
-             const res =await axios.post('/api/Registerapi', 
-             {
-                name: name,
-                email: email,
-                password: password
-            })
-            if((await res).data.message === "User created")
-            {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'สมัครสมาชิกสำเร็จ',
-                    text: 'User created successfully',
-                    showConfirmButton: false,
-                    timer: 1500
-                  })
-                  const dataToSend = {
-                    email: email,
-                    password: password,
-                    name: name
-                  };
-                  const queryParams = new URLSearchParams(dataToSend).toString();
-                  router.push(`/verifyemail?${queryParams}`);
+    //          const res =await axios.post('/api/Registerapi', 
+    //          {
+    //             name: name,
+    //             email: email,
+    //             password: password
+    //         })
+    //         if((await res).data.message === "User created")
+    //         {
+    //             Swal.fire({
+    //                 icon: 'success',
+    //                 title: 'สมัครสมาชิกสำเร็จ',
+    //                 text: 'User created successfully',
+    //                 showConfirmButton: false,
+    //                 timer: 1500
+    //               })
+    //               const dataToSend = {
+    //                 email: email,
+    //                 password: password,
+    //                 name: name
+    //               };
+    //               const queryParams = new URLSearchParams(dataToSend).toString();
+    //               router.push(`/verifyemail?${queryParams}`);
                   
-            }
-            else
-            {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Email ถูกใช้งานแล้ว',
-                    text: 'User already exists!',
-                    })
-                }
-    }
+    //         }
+    //         else
+    //         {
+    //             Swal.fire({
+    //                 icon: 'error',
+    //                 title: 'Email ถูกใช้งานแล้ว',
+    //                 text: 'User already exists!',
+    //                 })
+    //             }
+    // }
 
     if(activeotp)
     {
